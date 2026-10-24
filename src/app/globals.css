@@ -9,6 +9,7 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-display: var(--font-space-grotesk), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-cormorant: var(--font-cormorant-garamond), "Cormorant Garamond", Georgia, serif;
+  --font-fraunces: var(--font-fraunces-var), Fraunces, Georgia, "Times New Roman", serif;
   --font-archivo: var(--font-archivo), var(--font-space-grotesk), "Arial Black", Arial, sans-serif;
   --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, monospace;
   --color-sidebar-ring: var(--sidebar-ring);

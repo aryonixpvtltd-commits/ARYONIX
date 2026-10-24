@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback, useEffect, useRef } from "react";
 import { ArrowUpRight, X } from "lucide-react";
 import {
   Dialog,
@@ -33,6 +34,32 @@ export function DemoViewer({
   title,
   note,
 }: DemoViewerProps) {
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
+
+  // Keep a stable reference to the latest onOpenChange so the iframe
+  // key handler never goes stale across re-renders.
+  const onOpenChangeRef = useRef(onOpenChange);
+  useEffect(() => {
+    onOpenChangeRef.current = onOpenChange;
+  }, [onOpenChange]);
+
+  /**
+   * Keyboard focus can sit inside the concept site, where Escape never
+   * reaches this document — so the viewer would stay open. The iframe is
+   * same-origin, so listen for Escape there too and forward it.
+   */
+  const handleIframeLoad = useCallback(() => {
+    const doc = iframeRef.current?.contentDocument;
+    if (!doc) return;
+    const handler = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.stopPropagation();
+        onOpenChangeRef.current(false);
+      }
+    };
+    doc.addEventListener("keydown", handler, true);
+  }, []);
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
@@ -75,8 +102,10 @@ export function DemoViewer({
 
         {/* Concept site itself */}
         <iframe
+          ref={iframeRef}
           src={href}
           title={`${title} — concept website preview`}
+          onLoad={handleIframeLoad}
           className="min-h-0 w-full flex-1 border-0 bg-[#F2EDE3]"
         />
       </DialogContent>

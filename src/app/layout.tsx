@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import {
   Archivo,
   Cormorant_Garamond,
+  Fraunces,
   Inter,
   Space_Grotesk,
 } from "next/font/google";
@@ -35,6 +36,15 @@ const archivo = Archivo({
   variable: "--font-archivo",
   subsets: ["latin"],
   weight: ["500", "700", "800", "900"],
+  display: "swap",
+  preload: false,
+});
+
+/** Editorial serif used by the Blend Studioo concept mockup (matches that build). */
+const fraunces = Fraunces({
+  variable: "--font-fraunces-var",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
   display: "swap",
   preload: false,
 });
@@ -119,7 +129,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${spaceGrotesk.variable} ${cormorant.variable} ${archivo.variable} font-sans antialiased bg-background text-foreground`}
+        className={`${inter.variable} ${spaceGrotesk.variable} ${cormorant.variable} ${archivo.variable} ${fraunces.variable} font-sans antialiased bg-background text-foreground`}
       >
         {children}
       </body>

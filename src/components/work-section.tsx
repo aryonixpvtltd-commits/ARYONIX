@@ -34,10 +34,11 @@ export function WorkSection() {
           }
           lead={
             <>
-              Two concepts built for real businesses — one an unofficial
-              demonstration prepared for a Nagpur interior design studio, the
-              other an unapproved proposal for a Pune gym — both complete
-              enough to browse in full right here.{" "}
+              Three concepts built for real businesses — an unofficial
+              demonstration for a Nagpur interior design studio, a proposal
+              for a Pune gym, and a redesign study for a Baner hair &amp;
+              beauty studio — each complete enough to browse in full right
+              here.{" "}
               <strong className="font-medium text-foreground">
                 Every entry is labelled honestly: no client engagement is
                 implied, and nothing here is presented as client work.
@@ -51,9 +52,10 @@ export function WorkSection() {
             <Reveal key={project.id}>
               <article className="group border-t border-border py-12 last:border-b sm:py-16">
                 <div className="grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-14">
-                  {/* Visual preview */}
+                  {/* Visual preview — min-w-0 lets the tile shrink inside the
+                      grid so nowrap preview chrome can never widen the page */}
                   <div
-                    className={`lg:col-span-7 ${
+                    className={`min-w-0 lg:col-span-7 ${
                       i % 2 === 1 ? "lg:order-2" : "lg:order-1"
                     }`}
                   >

@@ -1,9 +1,10 @@
 export type ProjectStatus =
   | "Prospective-Client Demo"
-  | "Unapproved Concept Proposal";
+  | "Unapproved Concept Proposal"
+  | "Unofficial Concept Study";
 
 export type Project = {
-  id: "new-dimension" | "rockfold";
+  id: "new-dimension" | "rockfold" | "blend-studioo";
   index: string;
   title: string;
   category: string;
@@ -13,7 +14,7 @@ export type Project = {
    * Visual composition variant rendered by the mockup components.
    * Each project gets a genuinely different layout treatment.
    */
-  variant: "nd-cinematic" | "rf-cinematic";
+  variant: "nd-cinematic" | "rf-cinematic" | "bs-editorial";
   /**
    * Browsable concept sites: statically exported builds served from
    * public/ and opened in the in-page demo viewer.
@@ -106,6 +107,42 @@ export const projects: Project[] = [
       ],
       disclaimer:
         "Unapproved concept proposal by ARYONIX for Rockfold Fitness (Wagholi, Pune) — not client-approved and not the gym's live website. Photography is licensed placeholder imagery; some content remains pending client verification.",
+    },
+  },
+  {
+    id: "blend-studioo",
+    index: "03",
+    title: "BLEND STUDIOO",
+    category: "Hair, Beauty & Grooming Studio · Baner, Pune",
+    description:
+      "A calmer, more editorial redesign concept for Blend Studioo — built around the studio's name, location and live website only, with contact details, pricing and reviews deliberately left out until they can be verified with the salon.",
+    status: "Unofficial Concept Study",
+    variant: "bs-editorial",
+    liveDemo: {
+      href: "/blendstudio/index.html",
+      linkLabel: "Open the full concept",
+      note: "Unofficial redesign concept, built by ARYONIX — not commissioned or endorsed, and not the salon's live website.",
+    },
+    caseStudy: {
+      overview:
+        "A self-initiated concept study for Blend Studioo, a hair, beauty and grooming studio in Baner, Pune. It reimagines the salon's web presence in a quieter editorial language — Fraunces headlines on an ivory-and-charcoal canvas, a split hero with a slow-settling photograph, a numbered services menu, and a booking flow that says exactly what it is: a demonstration. Only three facts about the business are asserted anywhere — its name, its locality, and its live website — everything else waits for verification.",
+      scope: [
+        "Split editorial hero carrying the concept's own positioning — “Your beauty, your ritual.”",
+        "Numbered services menu across six disciplines with expandable rows",
+        "The Blend Ritual — a four-step service story on a dark chapter",
+        "Reviews handled honestly: no invented testimonials — a link to the salon's Google listing instead",
+        "Gallery labelled as licensed stock, none of it the salon's own work",
+        "Demo-mode booking form — explicit demonstration notice, nothing stored or sent",
+        "One-tap Google Maps directions and review links for the real studio",
+      ],
+      buildNotes: [
+        "Only verified facts used: name, locality (Baner, Pune) and blendstudioo.com — no phone, hours or ratings anywhere",
+        "Honesty guards in the UI: concept cover, demo-mode form, per-image stock labels, footer verification note",
+        "Fraunces + Hanken Grotesk pairing on an ivory, charcoal and champagne palette",
+        "Single self-contained HTML file with image fallback chains and reduced-motion support",
+      ],
+      disclaimer:
+        "Unofficial concept study by ARYONIX for Blend Studioo (Baner, Pune) — not commissioned or endorsed, and not the salon's live website. Business details are illustrative pending verification; photography is licensed stock imagery.",
     },
   },
 ];

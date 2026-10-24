@@ -44,7 +44,7 @@ const eslintConfig = [...nextCoreWebVitals, ...nextTypescript, {
     "no-useless-escape": "off",
   },
 }, {
-  ignores: ["node_modules/**", ".next/**", "out/**", "build/**", "next-env.d.ts", "examples/**", "skills", "public/new-dimension/**", "public/rockfold/**", "scripts/qa-*.png"]
+  ignores: ["node_modules/**", ".next/**", "out/**", "build/**", "next-env.d.ts", "examples/**", "skills", "public/new-dimension/**", "public/rockfold/**", "public/blendstudio/**", "scripts/qa-*.png"]
 }];
 
 export default eslintConfig;

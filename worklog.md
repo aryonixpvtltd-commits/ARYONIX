@@ -59,3 +59,27 @@ Stage Summary:
 - Work section now contains only the two complete, browseable real-business concepts; all "empty example" placeholder studies removed
 - Honest-positioning copy updated throughout the section; footer note ("Concept studies on this site are labelled as such") remains accurate
 - No public/ or concept-site assets touched; both live demos (new-dimension, rockfold) unaffected
+
+---
+Task ID: 4
+Agent: Z.ai Code (main)
+Task: Add the uploaded Blend Studioo concept website (upload/blendstudio.html) as a third entry in the "Work that shows how we think" section.
+
+Work Log:
+- Assessed upload/blendstudio.html: self-contained ARYONIX concept (87KB) for Blend Studioo, a hair/beauty/grooming studio in Baner, Pune; concept cover, numbered services menu, dark ritual chapter, demo-mode booking, reviews deliberately linked to Google (no invented testimonials); only name/locality/live-URL asserted as facts
+- Deployed verbatim to public/blendstudio/index.html (serves 200; imagery is the concept's own Unsplash hotlinks with fallback chains)
+- Downloaded the concept's own licensed stock images to public/work/blend-studioo/ (hero.jpg 1100x1320 salon shot, colour.jpg 720x540 stylist shot — first Unsplash ID failed, used the concept's fallback ID)
+- Added Fraunces via next/font/google (variable --font-fraunces-var, preload:false, normal+italic) in layout.tsx; mapped --font-fraunces token in globals.css @theme inline
+- work.ts: extended ProjectStatus with "Unofficial Concept Study" (matches the concept's own on-page label); added entry id "blend-studioo", index "03", liveDemo href /blendstudio/index.html, honest description/scope/buildNotes/disclaimer (not commissioned or endorsed; details pending verification)
+- project-mockups.tsx: added BlendStudiooMockup (variant "bs-editorial") — charcoal honesty ribbon, ivory split hero with Fraunces "Your beauty, your ritual." + champagne italic, salon photo with "Licensed stock · Unsplash" label, service-ticker strip with "Details pending verification" chip
+- work-section.tsx: lead copy updated to "Three concepts built for real businesses"
+- eslint.config.mjs: added public/blendstudio/** to ignores
+- DemoViewer fix: same-origin iframe now forwards Escape (capture listener on iframe document, stable onOpenChange ref) — Escape closes the viewer even when focus is inside the concept site; benefits all three concepts
+- Mobile overflow fix: nowrap ticker's intrinsic min-content propagated through the grid item (min-width:auto chain) widening the page to 689px; fixed with min-w-0 on the work-section visual grid item + min-w-0 on ticker + copy-only mobile layout (figure/lede hidden below sm); ribbon text now wraps instead of truncating
+- QA via agent-browser: 3 entries (01 NEW DIMENSION / 02 ROCKFOLD FITNESS / 03 BLEND STUDIOO), statuses correct, Blend dialog + viewer + concept cover dismissal + services accordion + demo-mode form ("Nothing is stored or sent") all verified; Escape layering works from inside iframe; Rockfold viewer regression passed; desktop 1280 and mobile 390 no horizontal overflow; lint clean; dev.log clean
+
+Stage Summary:
+- Work section now presents three browseable real-business concepts, each with its own honest status: Prospective-Client Demo / Unapproved Concept Proposal / Unofficial Concept Study
+- Blend Studioo concept is fully browseable in-page with all its honesty guards intact (concept cover, demo-mode form, stock labels, no-index meta)
+- Shared DemoViewer improvement: Escape-from-iframe forwarding fixes keyboard dismissal for all embedded concept sites
+- Layout hardening: work-section grid item min-w-0 prevents any future nowrap preview chrome from widening the page
