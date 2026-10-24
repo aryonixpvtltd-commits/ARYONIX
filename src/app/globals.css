@@ -142,12 +142,6 @@
   font-weight: 500;
 }
 
-/* Outlined display text (FITNIQ mockup) */
-.text-stroke {
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(243, 244, 246, 0.85);
-}
-
 /* Scroll-reveal — content stays visible without JavaScript:
    the starting state only applies once <html class="js"> is set. */
 html.js [data-reveal] {
@@ -190,27 +184,13 @@ html.js [data-reveal="in"] {
   animation: hero-float 7s ease-in-out infinite;
 }
 
-/* Orbital spin (ORBIT mockup) */
-@keyframes orbit-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-.orbit-spin {
-  animation: orbit-spin 14s linear infinite;
-}
-
 /* Reduced motion: stop everything, show all content instantly */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
   .marquee-track,
-  .hero-float,
-  .orbit-spin {
+  .hero-float {
     animation: none !important;
   }
   html.js [data-reveal] {

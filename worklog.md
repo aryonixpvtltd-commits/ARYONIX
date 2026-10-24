@@ -38,3 +38,24 @@ Stage Summary:
 - WhatsApp journey verified end-to-end with exact recipient 919359368382.
 - Key artifacts: src/components/* (16 components incl. demo-viewer), src/lib/* (4 data modules), public/brand/*, public/new-dimension/ (export), public/rockfold/ (static site), public/work/{new-dimension,rockfold}/ (mockup photos), scripts/make_brand_assets.py.
 - Rebuild recipe for ND export: /home/z/nd-build/app (node_modules hard-linked) → ./node_modules/.bin/next build → cp out → public/new-dimension/. Rockfold needs no build (plain static files).
+
+---
+Task ID: 3
+Agent: Z.ai Code (main)
+Task: Remove the four "empty example" projects (FITNIQ, ORBIT FITNESS, MERIDIAN & CO., FOLIO) from the "Work that shows how we think" section — keep only the two real-business concepts (NEW DIMENSION, ROCKFOLD FITNESS).
+
+Work Log:
+- Removed the 4 self-initiated concept entries from src/lib/work.ts; reindexed NEW DIMENSION → "01", ROCKFOLD FITNESS → "02"
+- Cleaned types in work.ts: Project["id"] now "new-dimension" | "rockfold"; variant union now "nd-cinematic" | "rf-cinematic"; ProjectStatus reduced to "Prospective-Client Demo" | "Unapproved Concept Proposal"; liveDemo made required (both projects have one)
+- Rewrote NEW DIMENSION overview to drop the "Unlike the self-initiated studies above" reference
+- Removed FitniqMockup / OrbitMockup / MeridianMockup / FolioMockup and their switch cases from src/components/project-mockups.tsx
+- Updated work-section.tsx lead copy: now "Two concepts built for real businesses … Every entry is labelled honestly: no client engagement is implied, and nothing here is presented as client work."
+- Removed now-unused CSS from globals.css: .text-stroke (FITNIQ) and .orbit-spin keyframes/class incl. reduced-motion reference
+- Verified no stale references remain (grep for fitniq/orbit/meridian/folio/text-stroke/orbit-spin/old variants); only remaining hit is inquiry.ts "Personal portfolio" service option, which is an unrelated inquiry form category
+- QA via agent-browser: #work has exactly 2 articles (01 NEW DIMENSION, 02 ROCKFOLD FITNESS); both case-study dialogs open with correct status/disclaimer; demo viewer opens /rockfold/index.html with honesty note; Escape closes viewer then dialog (layering intact); console clean; desktop + 390×844 mobile render with no horizontal overflow; lint clean
+- Noted stale 404 log entries for /work/new-dimension/*.jpg — confirmed historical (files exist on disk since 07:25, current requests 200, images render in screenshots)
+
+Stage Summary:
+- Work section now contains only the two complete, browseable real-business concepts; all "empty example" placeholder studies removed
+- Honest-positioning copy updated throughout the section; footer note ("Concept studies on this site are labelled as such") remains accurate
+- No public/ or concept-site assets touched; both live demos (new-dimension, rockfold) unaffected

@@ -34,14 +34,13 @@ export function WorkSection() {
           }
           lead={
             <>
-              Four self-initiated concept studies, each exploring a different
-              business and a different visual language — plus two full concepts
-              built for real businesses, which you can browse in full right
-              here.{" "}
+              Two concepts built for real businesses — one an unofficial
+              demonstration prepared for a Nagpur interior design studio, the
+              other an unapproved proposal for a Pune gym — both complete
+              enough to browse in full right here.{" "}
               <strong className="font-medium text-foreground">
-                Every entry is labelled honestly: four are self-initiated, one
-                is an unofficial prospective-client demonstration and one is an
-                unapproved proposal.
+                Every entry is labelled honestly: no client engagement is
+                implied, and nothing here is presented as client work.
               </strong>
             </>
           }
