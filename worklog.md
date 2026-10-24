@@ -99,3 +99,21 @@ Work Log:
 Stage Summary:
 - Contact identity now uses @aryonix.in for Instagram across the contact card, footer, and structured data
 - The github.io website row is fully removed; GitHub profile link retained as requested (user only asked to remove the Website section)
+
+---
+Task ID: 6
+Agent: Z.ai Code (main)
+Task: Package the project for the user's local workflow — download → VS Code → GitHub → Vercel.
+
+Work Log:
+- Audited repo state: .git exists (sandbox-only history, no remote), .env contains only unused DATABASE_URL, no src/ code imports db/prisma (site is fully static content + WhatsApp handoff), z-ai-web-dev-sdk unused but resolves from public npm registry (safe to keep)
+- package.json: start script changed from "bun .next/standalone/server.js | tee server.log" to "NODE_ENV=production node .next/standalone/server.js" — portable on any machine with Node, no Bun required
+- .gitignore: appended workspace-artifacts section (/db, /upload, /download, /examples, /tests, /mini-services, /skills, /.zscripts, /.z-ai-config, /.claude, /scripts/qa*.png, /worklog.md, /Caddyfile) so nothing sandbox-specific can reach GitHub regardless of export route
+- Built download/aryonix-website.zip (8.6 MB, 202 files): excludes node_modules/.next/.git/.env/db/logs/upload/download/examples/tests/mini-services/skills/worklog.md/Caddyfile/QA screenshots; includes src, public (all three concept sites + brand + work images), prisma schema, configs, package.json, bun.lock, next-env.d.ts
+- Verified zip contents: package.json, next.config.ts, .gitignore, bun.lock, src/app/page.tsx, all three concept sites, brand + work assets present
+- bun run lint clean; dev server HTTP 200 after edits (start-script change does not affect running dev server)
+
+Stage Summary:
+- download/aryonix-website.zip is the single artifact the user needs: unzip → npm install → npm run dev → git init/push → Vercel import
+- Deployment posture: no env vars, no database, no basePath — Vercel default Next.js build works as-is (output: standalone is supported by Vercel; rewrites for /images/* are server-mode rewrites and are honored)
+- Future session note: if user edits the site here, regenerate the zip (or they can use the platform export button; .gitignore now guards against artifacts either way)

@@ -52,3 +52,17 @@ prompt
 server.log
 # Skills directory
 /skills/
+# ARYONIX workspace artifacts (sandbox-only, not part of the deployed site)
+/db
+/upload
+/download
+/examples
+/tests
+/mini-services
+/skills
+/.zscripts
+/.z-ai-config
+/.claude
+/scripts/qa*.png
+/worklog.md
+/Caddyfile
