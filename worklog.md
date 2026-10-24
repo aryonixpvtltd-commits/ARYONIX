@@ -83,3 +83,19 @@ Stage Summary:
 - Blend Studioo concept is fully browseable in-page with all its honesty guards intact (concept cover, demo-mode form, stock labels, no-index meta)
 - Shared DemoViewer improvement: Escape-from-iframe forwarding fixes keyboard dismissal for all embedded concept sites
 - Layout hardening: work-section grid item min-w-0 prevents any future nowrap preview chrome from widening the page
+
+---
+Task ID: 5
+Agent: Z.ai Code (main)
+Task: Update Instagram handle to @aryonix.in and remove the Website (aryonixpvtltd.github.io) row from the contact section.
+
+Work Log:
+- src/lib/site.ts: instagram updated to https://www.instagram.com/aryonix.in; removed the website field entirely
+- src/components/final-cta.tsx: removed the "Website" channel entry and the unused Globe icon import — contact list is now Email / WhatsApp / Instagram / GitHub
+- Verified no remaining references to site.website or aryonixpvtltd.github.io anywhere in src
+- Downstream consumers picked up the change automatically: footer Instagram link, JSON-LD structured data (sameAs), and the contact card's "@handle" display (computed from the URL)
+- QA via agent-browser: contact section shows exactly 4 channels with Instagram displayed as @aryonix.in linking to instagram.com/aryonix.in; no github.io mention anywhere on the page; structured data sameAs confirmed updated; mobile 390px renders with no horizontal overflow; lint clean; console clean
+
+Stage Summary:
+- Contact identity now uses @aryonix.in for Instagram across the contact card, footer, and structured data
+- The github.io website row is fully removed; GitHub profile link retained as requested (user only asked to remove the Website section)

@@ -11,9 +11,8 @@ export const site = {
   email: "aryonixpvtltd@gmail.com",
   whatsappNumber: "919359368382",
   whatsappDisplay: "+91 93593 68382",
-  instagram: "https://www.instagram.com/aryonixpvtltd",
+  instagram: "https://www.instagram.com/aryonix.in",
   github: "https://github.com/aryonixpvtltd",
-  website: "https://aryonixpvtltd.github.io",
   location: "India · working remotely with clients everywhere",
   url: "https://aryonix.dev",
 } as const;

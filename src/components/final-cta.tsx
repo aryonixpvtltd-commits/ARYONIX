@@ -1,4 +1,4 @@
-import { ArrowUpRight, Github, Globe, Instagram, Mail, MessageCircle } from "lucide-react";
+import { ArrowUpRight, Github, Instagram, Mail, MessageCircle } from "lucide-react";
 import { Reveal } from "./reveal";
 import { site } from "@/lib/site";
 
@@ -26,12 +26,6 @@ const channels = [
     value: site.github.replace("https://", ""),
     href: site.github,
     icon: Github,
-  },
-  {
-    label: "Website",
-    value: site.website.replace("https://", ""),
-    href: site.website,
-    icon: Globe,
   },
 ];
 
