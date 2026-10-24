@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+═══════════════════════════════════════════════════════════════════════════════
+  ROCKFOLD FITNESS — WEBSITE DESIGN CONCEPT
+  Studio: ARYONIX  ·  Status: UNAPPROVED CONCEPT PROPOSAL (not client-approved)
+  Location (client-verified): Grant Rd, beside Gera Bungalow, near Phoenix
+  World School, Ubale Nagar, Wagholi, Pune, Maharashtra 411014
+  NOTE: original brief referenced "Kharadi, Pune"; client-verified address is
+  Wagholi, Pune — all copy has been updated accordingly.
+
+  ═══ LOGO — SELF-CONTAINED SYSTEM (no external file needed) ═══
+  1. DEFAULT: a built-in vector rendition of the badge (arched "ROCK FOLD" /
+     "FITNESS" + barbell mark) renders everywhere instantly.
+  2. PREVIEW / DEV: click "LOGO SETUP" (bottom-left) → drag in the client's
+     real emblem PNG → it applies site-wide and persists via localStorage
+     for that browser. This tool is for build/preview only.
+  3. PRODUCTION: in the Logo Setup panel, click "COPY BASE64", then paste the
+     string into the LOGO_SRC constant at the top of the page script. The real
+     emblem is then permanently embedded in this single file — no assets folder.
+  4. LAUNCH: set SHOW_LOGO_TOOL = false (or delete the tool) before go-live.
+
+  ═══ VERIFICATION CHECKLIST ═══
+  [x] Street address        → client-verified (see above)
+  [x] Mobile number         → +91 96047 89090 (client-verified)
+  [x] Opening hours         → 6:00 AM – 11:00 PM (client-verified — CONFIRM
+                              OPEN DAYS: assumed Mon–Sun from supplied timing)
+  [x] Google Maps           → live embed in DEFAULT Google Maps colors +
+                              client-supplied short link for directions
+  [x] Logo                  → vector rendition embedded; client PNG embeds via
+                              Logo Setup (see instructions above)
+  [ ] Email address                → placeholder in contact + footer
+  [ ] Social profile URLs          → placeholders in footer
+  [ ] Confirmed service categories → Strength / Functional / PT / Conditioning
+                                     remain PROPOSED, not confirmed
+  [ ] Trainer names, roles, bios, certifications, portraits (3 empty
+      placeholder profiles shipped)
+  [ ] All photography → replace with licensed photos of the actual gym
+  [ ] Canonical URL (commented) + sitemap.xml + robots.txt (both included in
+      this package — set the final domain before deploy)
+  [ ] Privacy policy text
+  [ ] Real form backend / form service endpoint
+
+  ═══ PHOTOGRAPHY — ALL PLACEHOLDERS, NONE ARE ROCKFOLD FITNESS ═══
+  Source: Unsplash CDN (Unsplash License). Record photographer credits from
+  each photo page via the ID below. Each <img> has an onerror fallback.
+
+  ID                                          USED IN
+  photo-1541534741688-6078c6bfb5c5            Hero
+  photo-1571019613454-1cb2f99b2d8b            Brand statement
+  photo-1549476464-37392f717541               Category — Strength Training
+  photo-1517836357463-d25dfeac3438            Category — Functional Fitness
+  photo-1574680096145-d05b474e2155            Category — Personal Training
+  photo-1526506118085-60ce8714f8c5            Category — Conditioning
+  photo-1534438327276-14e5300c3a48            Gallery FIG.01
+  photo-1540497077202-7c8a3999166f            Gallery FIG.02
+  photo-1521804906057-1df8fdb718b7            Gallery FIG.03
+  photo-1546483875-ad9014c88eba               Gallery FIG.04
+
+  ═══ FORM — DEMO STATE ═══
+  Client-side validation + explicit "DEMO MODE" success panel. No data is
+  transmitted or stored. To go live: POST the serialized payload to a secure
+  server endpoint or form service. Never place API keys in this file.
+
+  ═══ ACCESSIBILITY ═══
+  Skip link · semantic landmarks · logical h1→h3 · visible :focus-visible
+  rings · aria-expanded mobile menu with ESC close · aria-live form errors
+  · native <dialog> · prefers-reduced-motion fully honoured.
+═══════════════════════════════════════════════════════════════════════════════
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rockfold Fitness — Gym in Wagholi, Pune | Open 6 AM–11 PM | Concept by ARYONIX</title>
+<meta name="description" content="Rockfold Fitness — a gym and fitness centre on Grant Rd, Ubale Nagar, Wagholi, Pune 411014 (near Phoenix World School). Open daily 6:00 AM – 11:00 PM. Call +91 96047 89090. Website design concept by ARYONIX; some content pending verification.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#090A0C">
+
+<!-- Canonical URL — uncomment and set once the domain is confirmed:
+<link rel="canonical" href="https://www.rockfoldfitness.com/"> -->
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Rockfold Fitness">
+<meta property="og:title" content="Rockfold Fitness — Gym in Wagholi, Pune | Open 6 AM–11 PM">
+<meta property="og:description" content="A performance-driven fitness experience on Grant Rd, Ubale Nagar, Wagholi, Pune 411014. Open daily 6:00 AM – 11:00 PM · +91 96047 89090. Design concept by ARYONIX.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=1200&h=630&q=80">
+<meta property="og:locale" content="en_IN">
+
+<!-- Favicon — inline placeholder mark; JS swaps in the embedded logo on load -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 20V6l8-3v6l8-3v14' fill='none' stroke='%23F5F5F7' stroke-width='2.4'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" id="appleIcon">
+
+<!-- Structured data — client-verified information only. Open days assumed
+     Mon–Sun from the supplied 6 AM–11 PM timing — confirm before launch.
+     Add "logo" with the absolute URL once the site is live. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ExerciseGym",
+  "name": "Rockfold Fitness",
+  "telephone": "+919604789090",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Grant Rd, beside Gera Bungalow, near Phoenix World School, Ubale Nagar, Wagholi",
+    "addressLocality": "Pune",
+    "addressRegion": "Maharashtra",
+    "postalCode": "411014",
+    "addressCountry": "IN"
+  },
+  "hasMap": "https://maps.app.goo.gl/M6Tedxz2twphwmhq9",
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "06:00",
+    "closes": "23:00"
+  }]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=2000&q=80">
+
+<script>document.documentElement.className += ' js';</script>
+
+<style>
+/* ═══════════════════ TOKENS & RESET ═══════════════════ */
+:root{
+  --bg:#090A0C;
+  --bg2:#111317;
+  --surface:#191C21;
+  --text:#F5F5F7;
+  --text2:#A1A5AD;
+  --line:rgba(255,255,255,.10);
+  --accent:#E2551F;             /* marks "pending verification" — verified items use the neutral tag */
+  --err:#E23D3D;
+  --ink:#0B0C0E;
+  --grade:grayscale(.35) contrast(1.07) brightness(.86);
+  --pad:clamp(20px,4.5vw,56px);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-padding-top:96px}
+html,body{overflow-x:clip}
+@media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth} }
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Archivo',Helvetica,sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+/* Cinematic film grain over the whole page */
+body::before{
+  content:"";position:fixed;inset:0;z-index:80;pointer-events:none;opacity:.045;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+ul{list-style:none}
+::selection{background:var(--accent);color:var(--ink)}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:#23262C;border:2px solid var(--bg)}
+:focus-visible{outline:2px solid #fff;outline-offset:3px}
+
+.skip{position:absolute;left:-9999px;top:0;z-index:200;background:var(--text);color:var(--ink);
+  padding:.8rem 1.2rem;font-weight:600;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
+.skip:focus{left:1rem;top:1rem}
+
+.mono{font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:400;
+  letter-spacing:.16em;text-transform:uppercase}
+.dim{color:var(--text2)}
+.vtag{font-family:'IBM Plex Mono',monospace;font-size:.58rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--text2);border:1px solid var(--line);
+  padding:.34rem .6rem;display:inline-flex;align-items:center;gap:.5rem;white-space:nowrap}
+.vtag::before{content:"";width:6px;height:6px;background:var(--accent);flex:none}
+.vtag.ok::before{background:var(--text)}   /* neutral dot = client-verified */
+
+/* ═══════════════════ LAYOUT ═══════════════════ */
+.wrap{width:min(1400px,100%);margin-inline:auto;padding-inline:var(--pad)}
+.section{border-top:1px solid var(--line);padding-block:clamp(88px,12vh,150px)}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:1.5rem;
+  flex-wrap:wrap;margin-bottom:clamp(2.4rem,6vw,4.2rem)}
+.sec-idx{display:inline-flex;align-items:center;gap:.8rem;color:var(--text)}
+.sec-idx::before{content:"";width:22px;height:1px;background:var(--accent)}
+.h2{font-weight:800;font-stretch:78%;text-transform:uppercase;line-height:.95;
+  letter-spacing:-.01em;font-size:clamp(2.5rem,6vw,4.9rem)}
+.h2 .stroke{color:transparent;-webkit-text-stroke:1.5px var(--text)}
+@supports not (-webkit-text-stroke:1px #fff){ .h2 .stroke{color:var(--text)} }
+
+/* Scroll reveals (JS-gated so no-JS users see everything) */
+.js .reveal{opacity:0;transform:translateY(26px);
+  transition:opacity .7s ease var(--d,0s),transform .8s var(--ease) var(--d,0s)}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .js .reveal{opacity:1;transform:none;transition:none}
+  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+}
+
+/* ═══════════════════ BUTTONS ═══════════════════ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.65rem;
+  font-weight:600;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:1.05rem 1.7rem;border:1px solid transparent;transition:all .3s var(--ease);white-space:nowrap}
+.btn svg{width:15px;height:15px;transition:transform .3s var(--ease)}
+.btn-solid{background:var(--text);color:var(--ink)}
+.btn-solid:hover{background:#fff}
+.btn-solid:hover svg{transform:translate(2px,-2px)}
+.btn-ghost{border-color:rgba(255,255,255,.28);color:var(--text)}
+.btn-ghost:hover{border-color:var(--text);background:rgba(255,255,255,.06)}
+.btn:active{transform:translateY(1px)}
+.btn-sm{padding:.62rem 1.05rem;font-size:.66rem}
+
+/* ═══════════════════ BRAND LOGO SYSTEM ═══════════════════
+   .brand-slot = fixed-size container. Inside it: <img.brand-logo> (bitmap logo,
+   hidden until JS applies a source) + <svg.brand-fallback> (built-in vector
+   rendition, always available — no external file needed). */
+.brand-slot{position:relative;width:44px;height:44px;flex:none}
+.brand-slot .brand-logo{position:absolute;inset:0;width:100%;height:100%;display:none;
+  border-radius:50%;object-fit:cover;background:var(--surface);
+  box-shadow:0 0 0 1px rgba(255,255,255,.10)}
+.brand-slot .brand-logo.ok{display:block}
+.brand-slot .brand-logo.ok + .brand-fallback{display:none}
+.brand-slot .brand-fallback{display:block;width:100%;height:100%}
+
+/* ═══════════════════ LOGO SETUP TOOL (build/preview only) ═══════════════════ */
+.logo-tool-btn{position:fixed;left:1rem;bottom:1rem;z-index:86;display:inline-flex;
+  align-items:center;gap:.55rem;font-family:'IBM Plex Mono',monospace;font-size:.6rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--text2);
+  background:rgba(9,10,12,.85);border:1px solid var(--line);padding:.6rem .9rem;
+  transition:color .25s,border-color .25s}
+.logo-tool-btn:hover{color:var(--text);border-color:var(--text)}
+.logo-tool-btn svg{width:14px;height:14px}
+.dropzone{margin:1.2rem 0;border:1px dashed rgba(255,255,255,.28);padding:1.8rem 1rem;
+  text-align:center;color:var(--text2);cursor:pointer;transition:border-color .25s,background .25s}
+.dropzone:hover,.dropzone.drag{border-color:var(--text);background:rgba(255,255,255,.04)}
+.dropzone svg{width:22px;height:22px;margin:0 auto .6rem;display:block;color:var(--text2)}
+.dropzone em{font-style:normal;font-size:.72rem;display:block;margin-top:.2rem}
+#logoB64{width:100%;background:#0D0F12;border:1px solid var(--line);color:var(--text2);
+  font-family:'IBM Plex Mono',monospace;font-size:.6rem;padding:.6rem;margin:.4rem 0 1.1rem;resize:vertical}
+.logo-actions{display:flex;gap:.7rem;flex-wrap:wrap}
+
+/* ═══════════════════ HEADER ═══════════════════ */
+.progress{position:fixed;top:0;left:0;height:2px;width:100%;z-index:90;
+  background:var(--accent);transform:scaleX(0);transform-origin:0 50%}
+header{position:fixed;top:0;left:0;right:0;z-index:70;transition:background .35s ease,border-color .35s ease}
+header.scrolled{background:rgba(9,10,12,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:2rem;height:76px}
+.brand{display:inline-flex;align-items:center;gap:.75rem}
+.brand b{font-weight:800;font-stretch:82%;letter-spacing:.14em;font-size:.92rem}
+.brand span{font-family:'IBM Plex Mono',monospace;font-size:.58rem;letter-spacing:.3em;color:var(--text2)}
+.nav-links{display:flex;gap:2.4rem}
+.nav-links a{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--text2);position:relative;padding:.4rem 0;transition:color .3s}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;
+  background:var(--text);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.nav-links a:hover,.nav-links a.active{color:var(--text)}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.nav-right{display:flex;align-items:center;gap:1.4rem}
+
+/* Hamburger + mobile menu */
+.nav-toggle{display:none;flex-direction:column;gap:6px;padding:.8rem .2rem;z-index:75}
+.nav-toggle span{display:block;width:26px;height:2px;background:var(--text);transition:transform .35s var(--ease),opacity .3s}
+.nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+.mmenu{position:fixed;inset:0;z-index:72;background:var(--bg);display:flex;flex-direction:column;
+  justify-content:center;padding:6rem var(--pad) 3rem;opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .4s ease,visibility 0s .4s}
+.mmenu.open{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .4s ease}
+.mmenu-brand{display:flex;align-items:center;gap:.85rem;margin-bottom:1.8rem}
+.mmenu-brand .brand-slot{width:52px;height:52px}
+.mmenu a.mlink{font-weight:800;font-stretch:78%;text-transform:uppercase;line-height:1;
+  font-size:clamp(2.4rem,10vw,4rem);padding:1rem 0;border-bottom:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;
+  opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s var(--ease)}
+.mmenu a.mlink .mono{color:var(--text2)}
+.mmenu.open a.mlink{opacity:1;transform:none}
+.mmenu.open a.mlink:nth-of-type(1){transition-delay:.08s}.mmenu.open a.mlink:nth-of-type(2){transition-delay:.14s}
+.mmenu.open a.mlink:nth-of-type(3){transition-delay:.2s}.mmenu.open a.mlink:nth-of-type(4){transition-delay:.26s}
+.mmenu.open a.mlink:nth-of-type(5){transition-delay:.32s}
+.mmenu-foot{margin-top:2.6rem;display:flex;flex-direction:column;gap:1.4rem;align-items:flex-start}
+.mmenu-foot a.mono{color:var(--text2);border-bottom:1px solid var(--line);padding-bottom:.2rem}
+body.locked{overflow:hidden}
+
+/* ═══════════════════ HERO ═══════════════════ */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;isolation:isolate;background:var(--bg)}
+.hero-media{position:absolute;inset:0;z-index:-1}
+.hero-media img{width:100%;height:100%;object-fit:cover;object-position:center;
+  filter:grayscale(.35) contrast(1.08) brightness(.8)}
+.hero-media::after{content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(to top, rgba(9,10,12,.94) 0%, rgba(9,10,12,.42) 42%, rgba(9,10,12,.28) 100%),
+    linear-gradient(to bottom, rgba(9,10,12,.55) 0%, rgba(9,10,12,0) 22%)}
+.hero-inner{width:100%;padding-block:0 clamp(64px,9vh,104px)}
+.eyebrow{display:inline-flex;align-items:center;gap:.9rem;margin-bottom:clamp(1.4rem,3vh,2.2rem)}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--accent)}
+.hero h1{font-weight:850;font-stretch:74%;text-transform:uppercase;line-height:.92;
+  letter-spacing:-.015em;font-size:clamp(3.3rem,10.5vw,9.2rem)}
+.hero h1 .dot{color:var(--accent)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:2rem 4rem}
+.hero-grid h1{grid-column:1/-1}
+.lead{color:var(--text2);font-size:1.02rem;max-width:44ch}
+.cta-row{display:flex;gap:.9rem;flex-wrap:wrap}
+.coords{position:absolute;right:var(--pad);top:50%;transform:translateY(-50%);
+  writing-mode:vertical-rl;font-family:'IBM Plex Mono',monospace;font-size:.62rem;
+  letter-spacing:.34em;color:var(--text2);text-transform:uppercase}
+.scroll-cue{position:absolute;bottom:clamp(28px,5vh,44px);right:var(--pad);display:flex;
+  flex-direction:column;align-items:center;gap:.7rem;color:var(--text2)}
+.scroll-cue .line{width:1px;height:52px;background:rgba(255,255,255,.18);position:relative;overflow:hidden}
+.scroll-cue .line::after{content:"";position:absolute;left:0;top:-40%;width:100%;height:40%;
+  background:var(--text);animation:cue 1.9s var(--ease) infinite}
+@keyframes cue{0%{top:-40%}60%,100%{top:110%}}
+/* Hero load choreography (pure CSS — works without JS) */
+.rise{opacity:0;transform:translateY(30px);animation:rise .85s var(--ease) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+.r1{animation-delay:.1s}.r2{animation-delay:.22s}.r3{animation-delay:.34s}.r4{animation-delay:.46s}.r5{animation-delay:.6s}
+
+/* ═══════════════════ 01 · STATEMENT ═══════════════════ */
+.statement h2{font-size:clamp(2.9rem,7.6vw,6.6rem);margin-bottom:clamp(3rem,7vw,5.5rem)}
+.st-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(1.4rem,2.4vw,2.5rem);align-items:start}
+.st-copy{grid-column:1/5}
+.st-copy p{color:var(--text2);font-size:1.05rem;max-width:38ch;margin-bottom:2.2rem}
+.principles li{display:flex;align-items:baseline;gap:1.1rem;padding:1rem 0;border-top:1px solid var(--line)}
+.principles li:last-child{border-bottom:1px solid var(--line)}
+.principles .num{font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--accent);letter-spacing:.1em}
+.principles .word{font-weight:700;font-stretch:82%;text-transform:uppercase;letter-spacing:.16em;font-size:.95rem}
+.st-media{grid-column:6/13}
+.st-media figure{position:relative}
+.st-media img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:var(--grade)}
+.st-media figcaption{margin-top:.9rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+
+/* ═══════════════════ 02 · TRAINING EXPERIENCE ═══════════════════ */
+.cat-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(14px,1.6vw,24px);margin-bottom:2.2rem}
+.cat{position:relative;display:block;overflow:hidden;background:var(--surface)}
+.cat:nth-child(1){grid-column:1/8;aspect-ratio:16/11}
+.cat:nth-child(2){grid-column:8/13;aspect-ratio:4/5;margin-top:clamp(40px,8vw,120px)}
+.cat:nth-child(3){grid-column:1/6;aspect-ratio:4/5}
+.cat:nth-child(4){grid-column:6/13;aspect-ratio:16/10;margin-top:clamp(40px,8vw,120px)}
+.cat-media{position:absolute;inset:0}
+.cat-media img{width:100%;height:100%;object-fit:cover;filter:var(--grade);
+  transition:transform .9s var(--ease)}
+.cat-media::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(9,10,12,.8) 0%, rgba(9,10,12,.1) 52%, rgba(9,10,12,.22) 100%)}
+.cat:hover .cat-media img,.cat:focus-visible .cat-media img{transform:scale(1.045)}
+.cat-idx{position:absolute;top:1.2rem;left:1.4rem;z-index:2;color:var(--accent);
+  font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.2em}
+.cat-info{position:absolute;left:1.4rem;right:5rem;bottom:1.3rem;z-index:2;transition:transform .45s var(--ease)}
+.cat:hover .cat-info{transform:translateY(-5px)}
+.cat-info h3{font-weight:800;font-stretch:78%;text-transform:uppercase;line-height:1;
+  font-size:clamp(1.45rem,2.4vw,2.1rem);margin-bottom:.45rem}
+.cat-info p{color:var(--text2);font-size:.85rem;max-width:34ch}
+.cat-arrow{position:absolute;top:1.1rem;right:1.2rem;z-index:2;width:44px;height:44px;
+  border:1px solid rgba(255,255,255,.32);border-radius:50%;display:grid;place-items:center;
+  color:var(--text);transition:all .35s var(--ease)}
+.cat-arrow svg{width:17px;height:17px}
+.cat:hover .cat-arrow{background:var(--text);color:var(--ink);border-color:var(--text)}
+.cat-note{display:flex;align-items:flex-start;gap:.8rem;max-width:72ch;color:var(--text2)}
+.cat-note svg{width:15px;height:15px;flex:none;margin-top:.15rem;color:var(--text2)}
+
+/* ═══════════════════ 03 · ENVIRONMENT GALLERY ═══════════════════ */
+.env-intro{max-width:60ch;color:var(--text2);font-size:1.02rem;margin-bottom:2.6rem}
+.viewer{position:relative;aspect-ratio:16/9;background:var(--surface);overflow:hidden;border:1px solid var(--line)}
+.viewer img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:var(--grade);
+  opacity:0;transform:scale(1.055);transition:opacity .65s ease,transform 1.6s var(--ease)}
+.viewer img.active{opacity:1;transform:scale(1)}
+.fig-bar{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.2rem}
+.fig-btn{display:flex;align-items:center;gap:.7rem;padding:.55rem .8rem;border:1px solid var(--line);
+  color:var(--text2);transition:all .3s var(--ease)}
+.fig-btn img{width:56px;height:36px;object-fit:cover;filter:var(--grade);opacity:.6;transition:opacity .3s}
+.fig-btn .mono{font-size:.6rem}
+.fig-btn:hover{border-color:rgba(255,255,255,.3);color:var(--text)}
+.fig-btn[aria-pressed="true"]{border-color:var(--text);color:var(--text)}
+.fig-btn[aria-pressed="true"] img{opacity:1}
+.fig-caption{margin-top:1.1rem;display:flex;align-items:center;gap:.9rem;flex-wrap:wrap}
+@media (prefers-reduced-motion:reduce){ .viewer img{transition:none;transform:none} }
+
+/* ═══════════════════ 04 · TEAM ═══════════════════ */
+.team-intro{max-width:62ch;color:var(--text2);font-size:1.02rem;margin-bottom:3rem}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,1.8vw,1.8rem);margin-bottom:2.4rem}
+.tcard{background:var(--bg2);border:1px solid var(--line);display:flex;flex-direction:column}
+.tphoto{aspect-ratio:3/4;border-bottom:1px solid var(--line);position:relative;
+  background:repeating-linear-gradient(45deg,transparent 0 10px,rgba(255,255,255,.028) 10px 11px),var(--bg2);
+  display:grid;place-items:center}
+.tphoto .inner{display:flex;flex-direction:column;align-items:center;gap:.8rem;text-align:center;padding:1rem}
+.tphoto svg{width:26px;height:26px;color:#3A3F47}
+.tphoto .mono{color:#4A505A;font-size:.6rem;line-height:1.7}
+.tbody{padding:1.5rem 1.5rem 1.7rem;display:flex;flex-direction:column;gap:0;flex:1}
+.tname-row{display:flex;justify-content:space-between;align-items:center;gap:.8rem;
+  padding-bottom:1.1rem;flex-wrap:wrap}
+.tname-row h3{font-weight:800;font-stretch:78%;text-transform:uppercase;font-size:1.15rem;letter-spacing:.02em}
+.meta-row{display:flex;justify-content:space-between;gap:1rem;padding:.75rem 0;border-top:1px solid var(--line)}
+.meta-row .k{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--text2);padding-top:.15rem;flex:none}
+.meta-row .v{font-size:.82rem;color:var(--text2);text-align:right}
+.tbio{border-top:1px solid var(--line);padding-top:1rem;font-size:.85rem;color:var(--text2);margin-top:auto}
+.team-note{border-left:2px solid var(--accent);padding:1.1rem 1.4rem;max-width:72ch;
+  color:var(--text2);font-size:.9rem;background:rgba(255,255,255,.02)}
+
+/* ═══════════════════ 05 · MEMBERSHIP ═══════════════════ */
+.mem-grid{display:grid;grid-template-columns:5fr 6fr;gap:clamp(2.5rem,6vw,6rem);align-items:start}
+.mem-copy{position:sticky;top:120px}
+.mem-copy .h2{margin-bottom:1.6rem}
+.mem-copy p{color:var(--text2);font-size:1.05rem;max-width:38ch;margin-bottom:2rem}
+.mem-demo-line{display:inline-flex}
+.form-panel{background:var(--bg2);border:1px solid var(--line);padding:clamp(1.6rem,3.4vw,2.8rem)}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.field{margin-bottom:1.2rem}
+.field label,.field legend{display:block;font-family:'IBM Plex Mono',monospace;font-size:.62rem;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--text2);margin-bottom:.55rem}
+.field input,.field select{width:100%;background:#0D0F12;border:1px solid var(--line);
+  color:var(--text);padding:.9rem 1rem;font:inherit;font-size:.95rem;border-radius:0;
+  transition:border-color .25s,box-shadow .25s;appearance:none}
+.field input:focus,.field select:focus{outline:none;border-color:#fff;box-shadow:0 0 0 1px #fff}
+.field input::placeholder{color:#565B63}
+.selwrap{position:relative}
+.selwrap svg{position:absolute;right:.95rem;top:50%;transform:translateY(-50%);
+  width:15px;height:15px;color:var(--text2);pointer-events:none}
+.field select:invalid{color:#565B63}
+.selwrap select option{background:var(--surface);color:var(--text)}
+.pills{display:flex;gap:.6rem;flex-wrap:wrap}
+.pill{position:relative}
+.pill input{position:absolute;opacity:0;pointer-events:none}
+.pill span{display:inline-block;padding:.68rem 1.2rem;border:1px solid var(--line);
+  font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--text2);cursor:pointer;transition:all .25s}
+.pill input:checked + span{background:var(--text);color:var(--ink);border-color:var(--text)}
+.pill input:focus-visible + span{outline:2px solid #fff;outline-offset:2px}
+.err{display:none;font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.08em;
+  color:var(--err);margin-top:.5rem}
+.field.invalid .err{display:block}
+.field.invalid input,.field.invalid select{border-color:var(--err)}
+fieldset.field{border:0}
+.hp{position:absolute;left:-9999px;top:-9999px;opacity:0}
+.form-actions{margin-top:.4rem}
+.btn-submit{width:100%;position:relative}
+.btn-submit.loading{opacity:.75;pointer-events:none}
+.spinner{width:15px;height:15px;border:2px solid rgba(11,12,14,.3);border-top-color:var(--ink);
+  border-radius:50%;animation:spin .7s linear infinite;display:none}
+.btn-submit.loading .spinner{display:block}
+.btn-submit.loading .btn-label-icon{display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.privacy-line{margin-top:1rem;font-size:.74rem;color:var(--text2)}
+.alt-line{margin-top:.6rem;font-size:.8rem;color:var(--text2)}
+.alt-line a{color:var(--text);border-bottom:1px solid var(--line);white-space:nowrap}
+.alt-line a:hover{border-color:var(--text)}
+.success{text-align:left}
+.success .ok-ic{width:52px;height:52px;border:1px solid var(--line);border-radius:50%;
+  display:grid;place-items:center;margin-bottom:1.4rem}
+.success .ok-ic svg{width:22px;height:22px;color:var(--text)}
+.success h3{font-weight:800;font-stretch:78%;text-transform:uppercase;font-size:1.5rem;
+  margin-bottom:1rem;line-height:1.05}
+.success p{color:var(--text2);font-size:.95rem;max-width:46ch;margin-bottom:1.2rem}
+.success .mono{color:var(--text2)}
+
+/* ═══════════════════ 06 · CONTACT ═══════════════════ */
+.con-grid{display:grid;grid-template-columns:5fr 6fr;gap:clamp(2.5rem,6vw,6rem);align-items:start}
+.con-copy .h2{margin-bottom:1.4rem}
+.con-copy > p{color:var(--text2);max-width:42ch;margin-bottom:2.4rem}
+.c-list li{display:flex;align-items:flex-start;gap:1.1rem;padding:1.15rem 0;border-top:1px solid var(--line)}
+.c-list li:last-child{border-bottom:1px solid var(--line)}
+.c-ic{width:40px;height:40px;border:1px solid var(--line);display:grid;place-items:center;flex:none;color:var(--text2)}
+.c-ic svg{width:16px;height:16px}
+.c-body{flex:1;min-width:0}
+.c-body .k{display:block;margin-bottom:.25rem}
+.c-body p,.c-body a.val{font-size:.9rem;color:var(--text2)}
+.c-body a.val{border-bottom:1px solid var(--line);transition:color .25s,border-color .25s;display:inline-block}
+.c-body a.val:hover{color:var(--text);border-color:var(--text)}
+.c-list .vtag{align-self:center}
+.con-ctas{display:flex;gap:.9rem;flex-wrap:wrap;margin-top:2.2rem}
+.map-panel{position:relative;border:1px solid var(--line);background:#0D0F12;overflow:hidden;
+  aspect-ratio:10/9;min-height:340px}
+/* Map renders in DEFAULT Google Maps colors — no filter applied */
+.map-frame{position:absolute;inset:0;width:100%;height:100%;border:0}
+.map-chip{position:absolute;top:1rem;right:1rem;z-index:2;background:rgba(9,10,12,.72)}
+.map-tag{position:absolute;bottom:2.6rem;right:1rem;z-index:2;font-family:'IBM Plex Mono',monospace;
+  font-size:.6rem;letter-spacing:.28em;color:var(--text2);text-transform:uppercase;
+  background:rgba(9,10,12,.72);padding:.35rem .6rem}
+
+/* ═══════════════════ FOOTER ═══════════════════ */
+footer{border-top:1px solid var(--line);padding:clamp(3.5rem,7vh,5.5rem) 0 2rem;background:var(--bg)}
+.foot-word{font-weight:900;font-stretch:72%;text-transform:uppercase;line-height:.9;
+  letter-spacing:-.02em;font-size:clamp(2.6rem,8.6vw,9rem);white-space:nowrap;margin-bottom:clamp(2.8rem,6vh,4.5rem)}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1.3fr 1.6fr;gap:2.5rem;
+  padding-bottom:3rem;border-bottom:1px solid var(--line)}
+.foot-brand p{color:var(--text2);font-size:.88rem;max-width:28ch;margin-top:1rem}
+.foot-brand .brand-slot{width:64px;height:64px}
+.foot-h{display:block;margin-bottom:1.2rem;color:var(--text)}
+.foot-links li{margin-bottom:.7rem}
+.foot-links a{color:var(--text2);font-size:.86rem;transition:color .25s}
+.foot-links a:hover{color:var(--text)}
+.foot-contact li{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;
+  margin-bottom:.75rem;font-size:.8rem}
+.foot-contact .mono{font-size:.58rem}
+.foot-contact a{color:var(--text2);border-bottom:1px solid var(--line);transition:color .25s}
+.foot-contact a:hover{color:var(--text)}
+.foot-note{color:var(--text2);font-size:.8rem}
+.foot-note .vtag{margin-bottom:.9rem}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;gap:1.4rem;
+  flex-wrap:wrap;padding-top:1.8rem}
+.foot-bottom p{font-size:.74rem;color:var(--text2)}
+.link-btn{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--text2);border-bottom:1px solid var(--line);
+  padding-bottom:.2rem;transition:color .25s,border-color .25s}
+.link-btn:hover{color:var(--text);border-color:var(--text)}
+#toTop{width:44px;height:44px;border:1px solid var(--line);border-radius:50%;
+  display:grid;place-items:center;color:var(--text2);transition:all .3s var(--ease)}
+#toTop:hover{border-color:var(--text);color:var(--text);transform:translateY(-3px)}
+#toTop svg{width:16px;height:16px}
+
+/* ═══════════════════ DIALOGS ═══════════════════ */
+dialog{background:var(--surface);color:var(--text);border:1px solid var(--line);
+  padding:clamp(1.6rem,4vw,2.4rem);max-width:540px;width:calc(100% - 2rem);margin:auto}
+dialog::backdrop{background:rgba(5,6,7,.72);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+dialog h2{font-weight:800;font-stretch:78%;text-transform:uppercase;font-size:1.5rem;
+  margin-bottom:1.2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+dialog p{color:var(--text2);font-size:.92rem;margin-bottom:1rem}
+.dlg-close{color:var(--text2);transition:color .25s}
+.dlg-close:hover{color:var(--text)}
+.dlg-close svg{width:18px;height:18px}
+.dlg-note{font-size:.72rem;color:var(--text2);border-top:1px solid var(--line);padding-top:1rem;margin-top:1rem}
+.dlg-steps{margin:0 0 1rem;padding-left:1.2rem;color:var(--text2);font-size:.85rem}
+.dlg-steps li{margin-bottom:.4rem}
+.dlg-steps code{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--text)}
+
+/* ═══════════════════ RESPONSIVE ═══════════════════ */
+@media (max-width:1100px){
+  .coords{display:none}
+  .hero-grid{grid-template-columns:1fr}
+  .mem-grid,.con-grid{grid-template-columns:1fr}
+  .mem-copy{position:static}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .st-copy{grid-column:1/7}
+  .st-media{grid-column:7/13}
+}
+@media (max-width:880px){
+  .nav-links,.nav-right .btn{display:none}
+  .nav-toggle{display:flex}
+  .cat-grid{grid-template-columns:1fr;gap:14px}
+  .cat-grid .cat{grid-column:auto!important;margin-top:0!important;aspect-ratio:4/5!important}
+  .team-grid{grid-template-columns:1fr}
+  .st-grid{grid-template-columns:1fr}
+  .st-copy,.st-media{grid-column:auto}
+  .f-row{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .foot-word{white-space:normal}
+  .scroll-cue{display:none}
+  .viewer{aspect-ratio:4/3}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<!-- ══════════ BUILT-IN VECTOR BADGE (single source of truth) ══════════
+     Referenced by every logo slot via <use>. Also serialized to a data URI
+     by JS so it can be applied to <img> elements and the favicon. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <path id="rf-arc-top" d="M31,100 A69,69 0 0 1 169,100"/>
+    <path id="rf-arc-bot" d="M22,100 A78,78 0 0 0 178,100"/>
+  </defs>
+  <g id="rfmark">
+    <circle cx="100" cy="100" r="97" fill="#101216"/>
+    <circle cx="100" cy="100" r="93" fill="none" stroke="#F5F5F7" stroke-width="5"/>
+    <circle cx="100" cy="100" r="56" fill="none" stroke="#F5F5F7" stroke-width="2.5"/>
+    <text fill="#F5F5F7" font-family="'Archivo','Arial Black',Arial,sans-serif" font-size="26" font-weight="900" letter-spacing="3.5">
+      <textPath href="#rf-arc-top" startOffset="50%" text-anchor="middle">ROCK FOLD</textPath>
+    </text>
+    <text fill="#F5F5F7" font-family="'Archivo','Arial Black',Arial,sans-serif" font-size="23" font-weight="900" letter-spacing="7">
+      <textPath href="#rf-arc-bot" startOffset="50%" text-anchor="middle">FITNESS</textPath>
+    </text>
+    <!-- barbell pictogram with striped plates -->
+    <g fill="#F5F5F7">
+      <rect x="72" y="97.5" width="56" height="5" rx="2.5"/>
+      <rect x="79" y="93" width="4.5" height="14" rx="1"/>
+      <rect x="116.5" y="93" width="4.5" height="14" rx="1"/>
+      <rect x="66" y="84" width="4.5" height="32"/>
+      <rect x="60" y="87" width="4.5" height="26"/>
+      <rect x="54" y="90" width="4.5" height="20"/>
+      <rect x="49" y="93" width="4" height="14" rx="1"/>
+      <rect x="129.5" y="84" width="4.5" height="32"/>
+      <rect x="135.5" y="87" width="4.5" height="26"/>
+      <rect x="141.5" y="90" width="4.5" height="20"/>
+      <rect x="147" y="93" width="4" height="14" rx="1"/>
+    </g>
+  </g>
+</svg>
+
+<!-- ══════════ HEADER ══════════ -->
+<header id="siteHeader">
+  <div class="wrap nav">
+    <a class="brand" href="#hero" aria-label="Rockfold Fitness — back to top">
+      <span class="brand-slot">
+        <img class="brand-logo" alt="Rockfold Fitness logo" decoding="async">
+        <svg class="brand-fallback" viewBox="0 0 200 200" role="img" aria-label="Rockfold Fitness emblem"><use href="#rfmark"/></svg>
+      </span>
+      <span class="brand-txt"><b>ROCKFOLD</b> <span>FITNESS</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#experience" data-link="experience">Experience</a>
+      <a href="#training" data-link="training">Training</a>
+      <a href="#about" data-link="about">About</a>
+      <a href="#contact" data-link="contact">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <a class="btn btn-solid btn-sm" href="#membership">Join the Movement</a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mmenu" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile navigation -->
+<nav class="mmenu" id="mmenu" aria-label="Mobile navigation">
+  <div class="mmenu-brand" aria-hidden="true">
+    <span class="brand-slot">
+      <img class="brand-logo" alt="" decoding="async">
+      <svg class="brand-fallback" viewBox="0 0 200 200"><use href="#rfmark"/></svg>
+    </span>
+    <span class="brand-txt"><b>ROCKFOLD</b> <span>FITNESS</span></span>
+  </div>
+  <a class="mlink" href="#experience">Experience <span class="mono">01</span></a>
+  <a class="mlink" href="#training">Training <span class="mono">02</span></a>
+  <a class="mlink" href="#about">About <span class="mono">03</span></a>
+  <a class="mlink" href="#contact">Contact <span class="mono">04</span></a>
+  <a class="mlink" href="#membership">Join the Movement <span class="mono">05</span></a>
+  <div class="mmenu-foot">
+    <span class="vtag ok">Wagholi, Pune — verified</span>
+    <a class="mono" href="tel:+919604789090">+91 96047 89090 · 6 AM – 11 PM</a>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero" id="hero" aria-label="Introduction">
+  <div class="hero-media">
+    <!-- PLACEHOLDER PHOTOGRAPHY — licensed Unsplash image, replace with verified Rockfold Fitness photography -->
+    <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=2000&q=80"
+         alt="Athlete preparing for strength training in a dark, industrial gym — concept placeholder photography"
+         fetchpriority="high" decoding="async"
+         onerror="this.onerror=null;this.src='https://picsum.photos/seed/rockfold-hero/2000/1400.jpg'">
+  </div>
+  <p class="coords" aria-hidden="true">Grant Rd · Ubale Nagar · Wagholi · Pune — 411014</p>
+
+  <div class="wrap hero-inner">
+    <div class="hero-grid">
+      <p class="eyebrow mono rise r1">Rockfold Fitness / Wagholi, Pune</p>
+      <!-- Proposed concept copy -->
+      <h1>
+        <span class="rise r2" style="display:block">Built Through</span>
+        <span class="rise r3" style="display:block">Discipline<span class="dot">.</span></span>
+      </h1>
+      <p class="lead rise r4">A performance-driven fitness experience begins with the right
+        environment, the right mindset, and the commitment to show up.</p>
+      <div class="cta-row rise r5">
+        <a class="btn btn-solid" href="#experience">Explore the Experience <i data-lucide="arrow-down"></i></a>
+        <a class="btn btn-ghost" href="#membership">Enquire Now <i data-lucide="arrow-up-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue rise r5" aria-hidden="true">
+    <span class="mono" style="font-size:.58rem">Scroll</span>
+    <span class="line"></span>
+  </div>
+</section>
+
+<!-- ══════════ 01 · BRAND STATEMENT ══════════ -->
+<section class="section statement" id="statement" aria-labelledby="statement-h">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-idx mono">01 — The Standard</span>
+      <span class="mono dim">Concept copy — not an approved brand statement</span>
+    </div>
+    <h2 id="statement-h" class="h2 reveal">
+      <span style="display:block">Strength Is Earned.</span>
+      <span style="display:block"><span class="stroke">Never</span> Given.</span>
+    </h2>
+    <div class="st-grid">
+      <div class="st-copy reveal">
+        <p>Every session is an opportunity to build consistency, improve performance,
+          and move closer to your goals.</p>
+        <ul class="principles">
+          <li><span class="num">01</span><span class="word">Discipline</span></li>
+          <li><span class="num">02</span><span class="word">Consistency</span></li>
+          <li><span class="num">03</span><span class="word">Performance</span></li>
+        </ul>
+      </div>
+      <div class="st-media reveal" style="--d:.12s">
+        <figure>
+          <!-- PLACEHOLDER PHOTOGRAPHY — replace with verified Rockfold Fitness imagery -->
+          <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1100&h=1375&q=80"
+               alt="Athlete mid-training with focused intensity — concept placeholder photography"
+               loading="lazy" decoding="async"
+               onerror="this.onerror=null;this.src='https://picsum.photos/seed/rockfold-st/1100/1375.jpg'">
+          <figcaption>
+            <span class="vtag">Concept photography</span>
+            <span class="mono dim" style="font-size:.6rem">Replace with verified Rockfold Fitness imagery</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 02 · TRAINING EXPERIENCE ══════════ -->
+<section class="section" id="experience" aria-labelledby="exp-h">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-idx mono">02 — Training Experience</span>
+      <span class="mono dim">Proposed categories — pending confirmation</span>
+    </div>
+    <h2 id="exp-h" class="h2 reveal" style="margin-bottom:clamp(2.6rem,6vw,4.5rem)">
+      <span style="display:block">Train With</span>
+      <span style="display:block">Intent<span style="color:var(--accent)">.</span></span>
+    </h2>
+
+    <div class="cat-grid">
+      <!-- PLACEHOLDER PHOTOGRAPHY throughout -->
+      <a class="cat reveal" href="#membership" aria-label="Strength Training — enquire about membership">
+        <div class="cat-media">
+          <img src="https://images.unsplash.com/photo-1549476464-37392f717541?auto=format&fit=crop&w=1400&h=1000&q=80"
+               alt="Close view of an athlete's back during heavy lifting — concept placeholder photography"
+               loading="lazy" decoding="async"
+               onerror="this.onerror=null;this.src='https://picsum.photos/seed/rockfold-c1/1400/1000.jpg'">
+        </div>
+        <span class="cat-idx">01</span>
+        <div class="cat-info">
+          <h3>Strength Training</h3>
+          <p>Progressive resistance work centred on the fundamental lifts.</p>
+        </div>
+        <span class="cat-arrow"><i data-lucide="arrow-up-right"></i></span>
+      </a>
+
+      <a class="cat reveal" href="#membership" aria-label="Functional Fitness — enquire about membership" style="--d:.1s">
+        <div class="cat-media">
+          <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1000&h=1250&q=80"
+               alt="Athlete performing functional training movements — concept placeholder photography"
+               loading="lazy" decoding="async"
+               onerror="this.onerror=null;this.src='https://picsum.photos/seed/rockfold-c2/1000/1250.jpg'">
+        </div>
+        <span class="cat-idx">02</span>
+        <div class="cat-info">
+          <h3>Functional Fitness</h3>
+          <p>Movement-focused conditioning for everyday capability.</p>
+        </div>
+        <span class="cat-arrow"><i data-lucide="arrow-up-right"></i></span>
+      </a>
+
+      <a class="cat reveal" href="#membership" aria-label="Personal Training — enquire about membership">
+        <div class="cat-media">
+          <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=1000&h=1250&q=80"
+               alt="Athlete training with focused one-to-one attention — concept placeholder photography"
+               loading="lazy" decoding="async"
+               onerror="this.onerror=null;this.src='https://picsum.photos/seed/rockfold-c3/1000/1250.jpg'">
+        </div>
+        <span class="cat-idx">03</span>
+        <div class="cat-info">
+          <h3>Personal Training</h3>
+          <p>Individual coaching structured around your goals.</p>
+        </div>
+        <span class="cat-arrow"><i data-lucide="arrow-up-right"></i></span>
+      </a>
+
+      <a class="cat reveal" href="#membership" aria-label="Conditioning — enquire about membership" style="--d:.1s">
+        <div class="cat-media">
+          <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=1400&h=1000&q=80"
+               alt="Athlete gripping a loaded barbell — concept placeholder photography"
+               loading="lazy" decoding="async"
+               onerror="this.onerror=null;this.src='https://picsum.photos/seed/rockfold-c4/1400/1000.jpg'">
+        </div>
+        <span class="cat-idx">04</span>
+        <div class="cat-info">
+          <h3>Conditioning</h3>
+          <p>High-output work to build engine, endurance and grit.</p>
+        </div>
+        <span class="cat-arrow"><i data-lucide="arrow-up-right"></i></span>
+      </a>
+    </div>
+
+    <p class="cat-note reveal">
+      <i data-lucide="info"></i>
+      <span>The categories above are proposals for this design concept. They do not represent confirmed
+      Rockfold Fitness services until verified against the client brief.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ══════════ 03 · TRAINING ENVIRONMENT ══════════ -->
+<section class="section" id="training" aria-labelledby="env-h">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-idx mono">03 — The Environment</span>
+      <span class="mono dim">Placeholder imagery — see verification list</span>
+    </div>
+    <h2 id="env-h" class="h2 reveal" style="margin-bottom:1.6rem">
+      <span style="display:block">The Training</span>
+      <span style="display:block">Environment<span style="color:var(--accent)">.</span></span>
+    </h2>
+    <p class="env-intro reveal">The images below are licensed concept photography used to establish
+      the intended tone and grading of this section. They are <strong style="color:var(--text)">not
+      photographs of Rockfold Fitness</strong> and will be replaced with verified photography of the
+      actual facility.</p>
+
+    <div class="viewer reveal" role="group" aria-label="Training environment concept gallery">
+      <img class="viewer-img active" id="vLayerA"
+           src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1600&h=900&q=80"
+           alt="Wide view of gym equipment under directional light — concept placeholder photography"
+           loading="lazy" decoding="async"
+           onerror="this.onerror=null;this.src='https://picsum.photos/seed/rockfold-g1/1600/900.jpg'">
+      <img class="viewer-img" id="vLayerB" alt="" aria-hidden="true">
+    </div>
+
+    <div class="fig-bar reveal" role="group" aria-label="Select gallery image">
+      <button class="fig-btn" data-fig="0" aria-pressed="true" aria-label="Show concept image 1">
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=400&h=250&q=80" alt="" loading="lazy"
+             onerror="this.onerror=null;this.src='https://picsum.photos/seed/rockfold-g1/400/250.jpg'">
+        <span class="mono">Fig. 01</span>
+      </button>
+      <button class="fig-btn" data-fig="1" aria-pressed="false" aria-label="Show concept image 2">
+        <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=400&h=250&q=80" alt="" loading="lazy"
+             onerror="this.onerror=null;this.src='https://picsum.photos/seed/rockfold-g2/400/250.jpg'">
+        <span class="mono">Fig. 02</span>
+      </button>
+      <button class="fig-btn" data-fig="2" aria-pressed="false" aria-label="Show concept image 3">
+        <img src="https://images.unsplash.com/photo-1521804906057-1df8fdb718b7?auto=format&fit=crop&w=400&h=250&q=80" alt="" loading="lazy"
+             onerror="this.onerror=null;this.src='https://picsum.photos/seed/rockfold-g3/400/250.jpg'">
+        <span class="mono">Fig. 03</span>
+      </button>
+      <button class="fig-btn" data-fig="3" aria-pressed="false" aria-label="Show concept image 4">
+        <img src="https://images.unsplash.com/photo-1546483875-ad9014c88eba?auto=format&fit=crop&w=400&h=250&q=80" alt="" loading="lazy"
+             onerror="this.onerror=null;this.src='https://picsum.photos/seed/rockfold-g4/400/250.jpg'">
+        <span class="mono">Fig. 04</span>
+      </button>
+    </div>
+    <p class="fig-caption">
+      <span class="mono dim" id="figCaption" aria-live="polite">Fig. 01 — Concept image</span>
+      <span class="vtag">Placeholder — not Rockfold Fitness</span>
+    </p>
+  </div>
+</section>
+
+<!-- ══════════ 04 · ABOUT / THE TEAM ══════════ -->
+<section class="section" id="about" aria-labelledby="team-h">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-idx mono">04 — About / The Team</span>
+      <span class="mono dim">Profiles pending verification</span>
+    </div>
+    <h2 id="team-h" class="h2 reveal" style="margin-bottom:1.6rem">
+      <span style="display:block">Trust, Like Strength,</span>
+      <span style="display:block">Is Earned<span style="color:var(--accent)">.</span></span>
+    </h2>
+    <p class="team-intro reveal">Every coach profile on this site will follow one verified structure —
+      real name, real credentials, real photograph — published only after confirmation by
+      Rockfold Fitness. Until then, these placeholders stand deliberately empty.</p>
+
+    <div class="team-grid">
+      <!-- Three intentionally identical placeholder profiles -->
+      <article class="tcard reveal" aria-label="Trainer profile placeholder 1">
+        <div class="tphoto">
+          <div class="inner">
+            <i data-lucide="image-off"></i>
+            <span class="mono">Photograph — pending<br>Replace with approved portrait</span>
+          </div>
+        </div>
+        <div class="tbody">
+          <div class="tname-row">
+            <h3>Trainer Name</h3>
+            <span class="vtag">To be verified</span>
+          </div>
+          <div class="meta-row"><span class="k">Role</span><span class="v">To be verified</span></div>
+          <div class="meta-row"><span class="k">Certifications</span><span class="v">To be supplied</span></div>
+          <div class="meta-row"><span class="k">Experience</span><span class="v">To be verified</span></div>
+          <p class="tbio">Replace with an approved biography supplied by Rockfold Fitness.</p>
+        </div>
+      </article>
+
+      <article class="tcard reveal" aria-label="Trainer profile placeholder 2" style="--d:.1s">
+        <div class="tphoto">
+          <div class="inner">
+            <i data-lucide="image-off"></i>
+            <span class="mono">Photograph — pending<br>Replace with approved portrait</span>
+          </div>
+        </div>
+        <div class="tbody">
+          <div class="tname-row">
+            <h3>Trainer Name</h3>
+            <span class="vtag">To be verified</span>
+          </div>
+          <div class="meta-row"><span class="k">Role</span><span class="v">To be verified</span></div>
+          <div class="meta-row"><span class="k">Certifications</span><span class="v">To be supplied</span></div>
+          <div class="meta-row"><span class="k">Experience</span><span class="v">To be verified</span></div>
+          <p class="tbio">Replace with an approved biography supplied by Rockfold Fitness.</p>
+        </div>
+      </article>
+
+      <article class="tcard reveal" aria-label="Trainer profile placeholder 3" style="--d:.2s">
+        <div class="tphoto">
+          <div class="inner">
+            <i data-lucide="image-off"></i>
+            <span class="mono">Photograph — pending<br>Replace with approved portrait</span>
+          </div>
+        </div>
+        <div class="tbody">
+          <div class="tname-row">
+            <h3>Trainer Name</h3>
+            <span class="vtag">To be verified</span>
+          </div>
+          <div class="meta-row"><span class="k">Role</span><span class="v">To be verified</span></div>
+          <div class="meta-row"><span class="k">Certifications</span><span class="v">To be supplied</span></div>
+          <div class="meta-row"><span class="k">Experience</span><span class="v">To be verified</span></div>
+          <p class="tbio">Replace with an approved biography supplied by Rockfold Fitness.</p>
+        </div>
+      </article>
+    </div>
+
+    <p class="team-note reveal">No trainer profiles are published on this concept site. Names,
+      credentials, photographs and biographies will appear only after written verification from
+      Rockfold Fitness — replacing the placeholders above, one consistent structure at a time.</p>
+  </div>
+</section>
+
+<!-- ══════════ 05 · MEMBERSHIP & ENQUIRY ══════════ -->
+<section class="section" id="membership" aria-labelledby="mem-h">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-idx mono">05 — Membership</span>
+      <span class="mono dim">Frontend demo — no backend connected</span>
+    </div>
+    <div class="mem-grid">
+      <div class="mem-copy reveal">
+        <h2 id="mem-h" class="h2">
+          <span style="display:block">Your Next Chapter</span>
+          <span style="display:block">Starts Here<span style="color:var(--accent)">.</span></span>
+        </h2>
+        <p>Take the first step toward your fitness goals.</p>
+        <span class="vtag mem-demo-line">Demo state — submissions are not transmitted</span>
+      </div>
+
+      <div class="form-panel reveal" style="--d:.12s">
+        <!-- Honeypot — spam trap, hidden from humans and assistive tech -->
+        <div class="hp" aria-hidden="true">
+          <label>Company<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+        </div>
+
+        <form id="enquiryForm" novalidate>
+          <div class="f-row">
+            <div class="field" data-field="name">
+              <label for="f-name">Full name</label>
+              <input type="text" id="f-name" name="name" autocomplete="name" placeholder="Your full name" required>
+              <p class="err" id="e-name" aria-live="polite">Please enter your full name.</p>
+            </div>
+            <div class="field" data-field="phone">
+              <label for="f-phone">Phone number</label>
+              <input type="tel" id="f-phone" name="phone" inputmode="tel" autocomplete="tel" placeholder="+91 00000 00000" required>
+              <p class="err" id="e-phone" aria-live="polite">Please enter a valid phone number.</p>
+            </div>
+          </div>
+
+          <div class="field" data-field="email">
+            <label for="f-email">Email address</label>
+            <input type="email" id="f-email" name="email" autocomplete="email" placeholder="you@example.com" required>
+            <p class="err" id="e-email" aria-live="polite">Please enter a valid email address.</p>
+          </div>
+
+          <div class="field" data-field="goal">
+            <label for="f-goal">Fitness goals</label>
+            <div class="selwrap">
+              <select id="f-goal" name="goal" required>
+                <option value="" disabled selected>Select your primary goal</option>
+                <option>Building strength</option>
+                <option>Fat loss &amp; conditioning</option>
+                <option>General health &amp; fitness</option>
+                <option>Personal coaching</option>
+                <option>Not sure yet</option>
+              </select>
+              <i data-lucide="chevron-down"></i>
+            </div>
+            <p class="err" id="e-goal" aria-live="polite">Please select a fitness goal.</p>
+          </div>
+
+          <fieldset class="field" data-field="method">
+            <legend>Preferred contact method</legend>
+            <div class="pills">
+              <label class="pill">
+                <input type="radio" name="method" value="Phone" id="f-m-phone">
+                <span>Phone</span>
+              </label>
+              <label class="pill">
+                <input type="radio" name="method" value="Email" id="f-m-email">
+                <span>Email</span>
+              </label>
+            </div>
+            <p class="err" id="e-method" aria-live="polite">Please choose how you'd prefer to be contacted.</p>
+          </fieldset>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-solid btn-submit" id="submitBtn">
+              <span class="spinner" aria-hidden="true"></span>
+              <span id="submitLabel">Enquire About Membership</span>
+              <i data-lucide="arrow-up-right" class="btn-label-icon"></i>
+            </button>
+          </div>
+          <p class="privacy-line">Your details are used only to respond to your enquiry and are never
+            shared. This concept build transmits and stores nothing.</p>
+          <p class="alt-line">Prefer to talk? Call
+            <a href="tel:+919604789090">+91 96047 89090</a> — open 6:00 AM – 11:00 PM.</p>
+        </form>
+
+        <!-- Demo success state (explicit, honest) -->
+        <div class="success" id="formSuccess" hidden tabindex="-1" role="status">
+          <span class="ok-ic"><i data-lucide="check"></i></span>
+          <h3>Enquiry Recorded —<br>Demo Mode</h3>
+          <p>This concept build is not connected to a backend, so nothing was sent or stored.
+            In production, this form posts to a secure endpoint or form service agreed with
+            Rockfold Fitness.</p>
+          <p class="mono" style="font-size:.6rem">No data transmitted · No data stored</p>
+          <button type="button" class="btn btn-ghost btn-sm" id="resetForm" style="margin-top:1.4rem">
+            Send another enquiry
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 06 · LOCATION & CONTACT ══════════ -->
+<section class="section" id="contact" aria-labelledby="con-h">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-idx mono">06 — Visit</span>
+      <span class="mono dim">Location, phone &amp; hours verified · email &amp; socials pending</span>
+    </div>
+    <div class="con-grid">
+      <div class="con-copy reveal">
+        <h2 id="con-h" class="h2">
+          <span style="display:block">Find Us In</span>
+          <span style="display:block">Wagholi<span style="color:var(--accent)">.</span></span>
+        </h2>
+        <p>Rockfold Fitness is located on Grant Rd, beside Gera Bungalow, near Phoenix World School,
+          in Ubale Nagar, Wagholi, Pune 411014. The exact pin is marked on the map.</p>
+
+        <ul class="c-list">
+          <li>
+            <span class="c-ic"><i data-lucide="map-pin"></i></span>
+            <div class="c-body"><span class="mono dim k">Address</span>
+              <p>Grant Rd, beside Gera Bungalow, near Phoenix World School,
+              Ubale Nagar, Wagholi, Pune, Maharashtra 411014</p></div>
+            <span class="vtag ok">Verified</span>
+          </li>
+          <li>
+            <span class="c-ic"><i data-lucide="phone"></i></span>
+            <div class="c-body"><span class="mono dim k">Phone</span>
+              <a class="val" href="tel:+919604789090">+91 96047 89090</a></div>
+            <span class="vtag ok">Verified</span>
+          </li>
+          <li>
+            <span class="c-ic"><i data-lucide="clock"></i></span>
+            <div class="c-body"><span class="mono dim k">Hours</span>
+              <p>6:00 AM – 11:00 PM <span class="dim">(Daily — open days to be confirmed)</span></p></div>
+            <span class="vtag ok">Verified</span>
+          </li>
+          <li>
+            <span class="c-ic"><i data-lucide="mail"></i></span>
+            <div class="c-body"><span class="mono dim k">Email</span>
+              <p>To be added — published once supplied.</p></div>
+            <span class="vtag">Pending</span>
+          </li>
+        </ul>
+
+        <div class="con-ctas">
+          <a class="btn btn-solid" target="_blank" rel="noopener"
+             href="https://maps.app.goo.gl/M6Tedxz2twphwmhq9">
+            Get Directions <i data-lucide="navigation"></i>
+          </a>
+          <a class="btn btn-ghost" href="tel:+919604789090">
+            Call the Gym <i data-lucide="phone"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Live Google Maps embed — standard Google Maps colors, no CSS filter applied -->
+      <div class="map-panel reveal" style="--d:.12s">
+        <iframe class="map-frame"
+          src="https://www.google.com/maps?q=Grant+Rd,+beside+Gera+Bungalow,+near+Phoenix+World+School,+Ubale+Nagar,+Wagholi,+Pune,+Maharashtra+411014&amp;output=embed"
+          title="Google Map — Rockfold Fitness, Grant Rd, Ubale Nagar, Wagholi, Pune 411014"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        <span class="vtag ok map-chip">Verified location — Wagholi 411014</span>
+        <span class="map-tag" aria-hidden="true">Wagholi — Pune — 411014</span>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="wrap">
+    <p class="foot-word" aria-hidden="true">Rockfold&nbsp;Fitness</p>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#hero" aria-label="Rockfold Fitness — back to top">
+          <span class="brand-slot">
+            <img class="brand-logo" alt="Rockfold Fitness logo" decoding="async">
+            <svg class="brand-fallback" viewBox="0 0 200 200" role="img" aria-label="Rockfold Fitness emblem"><use href="#rfmark"/></svg>
+          </span>
+          <span class="brand-txt"><b>ROCKFOLD</b> <span>FITNESS</span></span>
+        </a>
+        <p>Grant Rd, Ubale Nagar, Wagholi,<br>Pune, Maharashtra 411014</p>
+      </div>
+      <nav aria-label="Footer">
+        <span class="foot-h mono dim">Explore</span>
+        <ul class="foot-links">
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#training">Training</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#membership">Membership</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div>
+        <span class="foot-h mono dim">Contact</span>
+        <ul class="foot-contact">
+          <li><span class="mono dim">Phone</span><a href="tel:+919604789090">+91 96047 89090</a></li>
+          <li><span class="mono dim">Hours</span><span class="dim">6:00 AM – 11:00 PM</span></li>
+          <li><span class="mono dim">Email</span><span class="dim">To be added</span></li>
+          <li><span class="mono dim">Instagram</span><span class="dim">To be added</span></li>
+          <li><span class="mono dim">Facebook</span><span class="dim">To be added</span></li>
+        </ul>
+      </div>
+      <div class="foot-note">
+        <span class="vtag">Unapproved concept</span>
+        <p>This website is a design concept by ARYONIX, created for presentation to Rockfold
+          Fitness. It has not been approved by the client. Location, phone and hours are
+          client-verified; remaining details and imagery are placeholders pending verification.</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>© <span id="year">2025</span> Rockfold Fitness — Concept by ARYONIX. Pending client approval.</p>
+      <div style="display:flex;align-items:center;gap:1.6rem">
+        <button class="link-btn" id="privacyBtn" aria-haspopup="dialog">Privacy Policy</button>
+        <button id="toTop" aria-label="Back to top"><i data-lucide="arrow-up"></i></button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Logo Setup tool (build/preview only — remove or disable before launch) -->
+<button class="logo-tool-btn" id="logoToolBtn" aria-haspopup="dialog">
+  <i data-lucide="image-plus"></i> Logo Setup
+</button>
+
+<dialog id="logoDialog" aria-labelledby="logoDlg-h">
+  <h2 id="logoDlg-h">Logo Setup
+    <button class="dlg-close" id="logoClose" aria-label="Close dialog"><i data-lucide="x"></i></button>
+  </h2>
+  <ol class="dlg-steps">
+    <li>Drop the Rockfold emblem PNG below — it applies across the whole site instantly
+      and is remembered in this browser.</li>
+    <li>For production, click <code>Copy base64</code> and paste the string into the
+      <code>LOGO_SRC</code> constant at the top of the page script.</li>
+    <li>Before launch, set <code>SHOW_LOGO_TOOL = false</code> or delete this tool.</li>
+  </ol>
+  <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="Upload the Rockfold logo image">
+    <i data-lucide="upload"></i>
+    <strong>Drop the emblem PNG here</strong>
+    <em>or click to browse</em>
+  </div>
+  <input type="file" id="logoFile" accept="image/*" hidden>
+  <p id="logoStatus" class="mono dim" style="font-size:.62rem" aria-live="polite"></p>
+  <label class="mono dim" for="logoB64" style="font-size:.6rem">Embedded base64 — for permanent production embed</label>
+  <textarea id="logoB64" readonly rows="3" placeholder="Load a PNG above to generate the production string."></textarea>
+  <div class="logo-actions">
+    <button type="button" class="btn btn-solid btn-sm" id="copyB64">Copy base64</button>
+    <button type="button" class="btn btn-ghost btn-sm" id="resetLogo">Reset to vector mark</button>
+  </div>
+  <p class="dlg-note">This panel is a build tool for the ARYONIX concept preview. It never
+    uploads the image anywhere — everything stays in your browser.</p>
+</dialog>
+
+<!-- Privacy policy placeholder dialog -->
+<dialog id="privacyDialog" aria-labelledby="privacy-h">
+  <h2 id="privacy-h">Privacy Policy
+    <button class="dlg-close" id="privacyClose" aria-label="Close dialog"><i data-lucide="x"></i></button>
+  </h2>
+  <p>The final privacy policy will be supplied and approved by Rockfold Fitness before launch.
+    No policy text is invented at the concept stage.</p>
+  <p>In this concept build, the enquiry form is a frontend demonstration only — no personal data
+    is transmitted, logged, or stored anywhere.</p>
+  <button class="btn btn-ghost btn-sm" id="privacyOk">Understood</button>
+</dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.462.0/dist/umd/lucide.min.js"></script>
+<script>
+(function(){
+  'use strict';
+  var $  = function(s){ return document.querySelector(s); };
+  var $$ = function(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); };
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (window.lucide) { window.lucide.createIcons(); }
+
+  /* ═══ LOGO SOURCE ═══════════════════════════════════
+     Paste the production base64 data URI between the quotes to embed the real
+     emblem permanently, e.g.:
+     var LOGO_SRC = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUg...';
+     Generate it with the Logo Setup panel (bottom-left) → "Copy base64".  */
+  var LOGO_SRC = '';
+
+  /* Set to false before launch to hide the Logo Setup tool */
+  var SHOW_LOGO_TOOL = true;
+
+  var RF_LOGO_KEY = 'rf_logo_src';
+
+  /* Build a data URI from the built-in vector badge (single source of truth) */
+  var hiddenSvg = document.querySelector('svg[width="0"]');
+  var vectorURI = '';
+  try {
+    var svgStr = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">'
+      + hiddenSvg.querySelector('defs').outerHTML
+      + document.getElementById('rfmark').outerHTML
+      + '</svg>';
+    vectorURI = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgStr);
+  } catch(e){ vectorURI = ''; }
+
+  function applyLogo(src){
+    if (!src) return;
+    $$('.brand-logo').forEach(function(img){ img.src = src; img.classList.add('ok'); });
+    var fav = document.querySelector('link[rel="icon"]');
+    if (fav) fav.href = src;
+    var apple = document.getElementById('appleIcon');
+    if (apple) apple.href = src;
+  }
+
+  var stored = null;
+  try { stored = localStorage.getItem(RF_LOGO_KEY); } catch(e){}
+
+  if (LOGO_SRC)              { applyLogo(LOGO_SRC); }
+  else if (stored)           { applyLogo(stored); }
+  else if (vectorURI)        { applyLogo(vectorURI); }
+
+  /* ── Logo Setup tool ─────────────────────────────── */
+  var logoDlg = $('#logoDialog'), logoBtn = $('#logoToolBtn');
+  var dz = $('#dropzone'), fileInput = $('#logoFile'), logoTa = $('#logoB64');
+  var logoStatus = $('#logoStatus');
+
+  if (!SHOW_LOGO_TOOL) { logoBtn.style.display = 'none'; }
+
+  logoBtn.addEventListener('click', function(){ logoDlg.showModal(); });
+  $('#logoClose').addEventListener('click', function(){ logoDlg.close(); });
+
+  function handleFile(f){
+    if (!f || !/^image\//.test(f.type)) {
+      logoStatus.textContent = 'Please choose an image file (PNG recommended).';
+      return;
+    }
+    var fr = new FileReader();
+    fr.onload = function(){
+      var uri = fr.result;
+      applyLogo(uri);
+      logoTa.value = uri;
+      try { localStorage.setItem(RF_LOGO_KEY, uri); } catch(e){}
+      logoStatus.textContent = 'Logo applied — saved in this browser. Copy base64 for production.';
+    };
+    fr.readAsDataURL(f);
+  }
+
+  dz.addEventListener('click', function(){ fileInput.click(); });
+  dz.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); }
+  });
+  ['dragenter','dragover'].forEach(function(ev){
+    dz.addEventListener(ev, function(e){ e.preventDefault(); dz.classList.add('drag'); });
+  });
+  dz.addEventListener('dragleave', function(){ dz.classList.remove('drag'); });
+  dz.addEventListener('drop', function(e){
+    e.preventDefault(); dz.classList.remove('drag');
+    handleFile(e.dataTransfer.files && e.dataTransfer.files[0]);
+  });
+  fileInput.addEventListener('change', function(){
+    handleFile(fileInput.files && fileInput.files[0]);
+  });
+
+  $('#copyB64').addEventListener('click', function(){
+    if (!logoTa.value) {
+      logoStatus.textContent = 'Load a PNG first to generate the base64 string.';
+      return;
+    }
+    logoTa.select();
+    var done = function(){ logoStatus.textContent = 'Copied — paste into LOGO_SRC at the top of the script.'; };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(logoTa.value).then(done, function(){
+        try { document.execCommand('copy'); done(); }
+        catch(e){ logoStatus.textContent = 'Select the text and copy manually (Ctrl/Cmd + C).'; }
+      });
+    } else {
+      try { document.execCommand('copy'); done(); }
+      catch(e){ logoStatus.textContent = 'Select the text and copy manually (Ctrl/Cmd + C).'; }
+    }
+  });
+
+  $('#resetLogo').addEventListener('click', function(){
+    try { localStorage.removeItem(RF_LOGO_KEY); } catch(e){}
+    if (vectorURI) applyLogo(vectorURI);
+    logoTa.value = '';
+    logoStatus.textContent = 'Reset to the built-in vector mark.';
+  });
+
+  /* ── Year ─────────────────────────────────────── */
+  var yearEl = $('#year'); if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  /* ── Header state + scroll progress (rAF-throttled) ── */
+  var header = $('#siteHeader'), progress = $('#progress'), ticking = false;
+  function onScroll(){
+    var y = window.scrollY || 0;
+    header.classList.toggle('scrolled', y > 24);
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.transform = 'scaleX(' + (max > 0 ? (y / max) : 0) + ')';
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if (!ticking) { ticking = true; window.requestAnimationFrame(onScroll); }
+  }, { passive:true });
+  onScroll();
+
+  /* ── Mobile menu ──────────────────────────────── */
+  var toggle = $('#navToggle'), mmenu = $('#mmenu');
+  function setMenu(open){
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    mmenu.classList.toggle('open', open);
+    document.body.classList.toggle('locked', open);
+    if (open) {
+      var first = mmenu.querySelector('a'); if (first) first.focus();
+    } else { toggle.focus(); }
+  }
+  toggle.addEventListener('click', function(){
+    setMenu(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+  mmenu.addEventListener('click', function(e){
+    if (e.target.closest('a')) setMenu(false);
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && mmenu.classList.contains('open')) setMenu(false);
+  });
+
+  /* ── Scroll reveals ───────────────────────────── */
+  var revealEls = $$('.reveal');
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    var ro = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) { en.target.classList.add('in'); ro.unobserve(en.target); }
+      });
+    }, { threshold:.12, rootMargin:'0px 0px -6% 0px' });
+    revealEls.forEach(function(el){ ro.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ── Active nav highlighting ──────────────────── */
+  var navMap = {};
+  $$('[data-link]').forEach(function(a){ navMap[a.getAttribute('data-link')] = a; });
+  if ('IntersectionObserver' in window) {
+    var no = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        var link = navMap[en.target.id];
+        if (!link) return;
+        if (en.isIntersecting) {
+          $$('.nav-links a').forEach(function(a){ a.classList.remove('active'); });
+          link.classList.add('active');
+        }
+      });
+    }, { rootMargin:'-42% 0px -52% 0px' });
+    ['experience','training','about','contact'].forEach(function(id){
+      var s = document.getElementById(id); if (s) no.observe(s);
+    });
+  }
+
+  /* ── Environment gallery (two-layer crossfade) ── */
+  var figs = [
+    { src:'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1600&h=900&q=80',
+      alt:'Wide view of gym equipment under directional light — concept placeholder photography',
+      fb:'https://picsum.photos/seed/rockfold-g1/1600/900.jpg' },
+    { src:'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=1600&h=900&q=80',
+      alt:'Dark gym interior with machines and moody lighting — concept placeholder photography',
+      fb:'https://picsum.photos/seed/rockfold-g2/1600/900.jpg' },
+    { src:'https://images.unsplash.com/photo-1521804906057-1df8fdb718b7?auto=format&fit=crop&w=1600&h=900&q=80',
+      alt:'Athlete training with dumbbells in a dim gym — concept placeholder photography',
+      fb:'https://picsum.photos/seed/rockfold-g3/1600/900.jpg' },
+    { src:'https://images.unsplash.com/photo-1546483875-ad9014c88eba?auto=format&fit=crop&w=1600&h=900&q=80',
+      alt:'Lifter preparing a barbell for a squat — concept placeholder photography',
+      fb:'https://picsum.photos/seed/rockfold-g4/1600/900.jpg' }
+  ];
+  var layers = [$('#vLayerA'), $('#vLayerB')];
+  var figBtns = $$('.fig-btn');
+  var figCaption = $('#figCaption');
+  var curLayer = 0, curFig = 0, switching = false;
+
+  function showFig(i){
+    if (i === curFig || switching) return;
+    switching = true;
+    var inEl = layers[1 - curLayer], outEl = layers[curLayer];
+    inEl.onerror = function(){ inEl.onerror = null; inEl.src = figs[i].fb; };
+    inEl.src = figs[i].src;
+    inEl.alt = figs[i].alt;
+    inEl.removeAttribute('aria-hidden');
+    var ready = (inEl.complete && inEl.naturalWidth > 0)
+      ? Promise.resolve()
+      : new Promise(function(res){ inEl.onload = res; inEl.onerror = res; });
+    ready.then(function(){
+      inEl.classList.add('active');
+      outEl.classList.remove('active');
+      outEl.setAttribute('aria-hidden','true');
+      curLayer = 1 - curLayer; curFig = i;
+      if (figCaption) figCaption.textContent = 'Fig. 0' + (i + 1) + ' — Concept image';
+      figBtns.forEach(function(b, bi){ b.setAttribute('aria-pressed', String(bi === i)); });
+      window.setTimeout(function(){ switching = false; }, reduceMotion ? 0 : 500);
+    });
+  }
+  figBtns.forEach(function(b){
+    b.addEventListener('click', function(){ showFig(parseInt(b.getAttribute('data-fig'), 10)); });
+  });
+
+  /* ── Enquiry form (demo state) ────────────────── */
+  var form = $('#enquiryForm'), success = $('#formSuccess'), submitBtn = $('#submitBtn');
+  var submitLabel = $('#submitLabel');
+
+  function fieldWrap(name){ return form.querySelector('[data-field="' + name + '"]'); }
+  function setInvalid(name, bad){ fieldWrap(name).classList.toggle('invalid', bad); }
+
+  var validators = {
+    name:   function(){ return $('#f-name').value.trim().length >= 2; },
+    phone:  function(){
+      var v = $('#f-phone').value.trim();
+      var digits = (v.match(/\d/g) || []).length;
+      return digits >= 7 && digits <= 15 && /^[+()\-\s\d]+$/.test(v);
+    },
+    email:  function(){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test($('#f-email').value.trim()); },
+    goal:   function(){ return $('#f-goal').value !== ''; },
+    method: function(){ return !!form.querySelector('input[name="method"]:checked'); }
+  };
+
+  ['name','phone','email'].forEach(function(n){
+    $('#' + (n === 'name' ? 'f-name' : n === 'phone' ? 'f-phone' : 'f-email'))
+      .addEventListener('input', function(){ setInvalid(n, false); });
+  });
+  $('#f-goal').addEventListener('change', function(){ setInvalid('goal', false); });
+  $$('input[name="method"]').forEach(function(r){
+    r.addEventListener('change', function(){ setInvalid('method', false); });
+  });
+
+  if (form) {
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      /* Honeypot filled → silently show demo state, discard data */
+      if (form.querySelector('input[name="company"]').value !== '') {
+        form.hidden = true; success.hidden = false; success.focus(); return;
+      }
+      var firstBad = null;
+      Object.keys(validators).forEach(function(n){
+        var ok = validators[n]();
+        setInvalid(n, !ok);
+        if (!ok && !firstBad) firstBad = n;
+      });
+      if (firstBad) {
+        var el = fieldWrap(firstBad).querySelector('input, select');
+        if (el) el.focus();
+        return;
+      }
+      /* Demo submission — nothing leaves the browser */
+      submitBtn.classList.add('loading');
+      submitBtn.setAttribute('aria-busy', 'true');
+      submitLabel.textContent = 'Sending…';
+      window.setTimeout(function(){
+        submitBtn.classList.remove('loading');
+        submitBtn.removeAttribute('aria-busy');
+        submitLabel.textContent = 'Enquire About Membership';
+        form.hidden = true;
+        success.hidden = false;
+        success.focus();
+      }, reduceMotion ? 200 : 1400);
+    });
+  }
+  var resetBtn = $('#resetForm');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', function(){
+      form.reset();
+      ['name','phone','email','goal','method'].forEach(function(n){ setInvalid(n, false); });
+      success.hidden = true;
+      form.hidden = false;
+      $('#f-name').focus();
+    });
+  }
+
+  /* ── Privacy dialog ───────────────────────────── */
+  var dlg = $('#privacyDialog');
+  $('#privacyBtn').addEventListener('click', function(){ dlg.showModal(); });
+  $('#privacyClose').addEventListener('click', function(){ dlg.close(); });
+  $('#privacyOk').addEventListener('click', function(){ dlg.close(); });
+  dlg.addEventListener('click', function(e){ if (e.target === dlg) dlg.close(); });
+
+  /* ── Back to top ──────────────────────────────── */
+  $('#toTop').addEventListener('click', function(){
+    window.scrollTo({ top:0, behavior: reduceMotion ? 'auto' : 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+# ARYONIX Website — Worklog
+
+---
+Task ID: 1 (full rebuild after workspace reset)
+Agent: Z.ai Code (main agent)
+Task: The workspace was found reset to the pristine template between sessions (all custom components, lib modules, brand assets, the New Dimension export and the previous worklog were lost). Rebuilt the complete ARYONIX production site from the established design brief, now with SIX Selected Work entries including two fully browsable concept sites (New Dimension + Rockfold).
+
+Work Log:
+- Discovery: src/ reset to template (only ui/ + db/utils), public/brand + public/new-dimension gone, worklog gone, /home/z/nd-build and /tmp extracts gone. Survivors: upload/aryonixlogo.png, upload/new-dimension-aryonix-concept.zip, upload/rockfold-fitness-website.zip, template node_modules, dev server healthy.
+- Brand assets: recreated PIL pipeline (scripts/make_brand_assets.py) — distance-based soft keying (bg ref [0,3,15], thresholds 20→62) on upload/aryonixlogo.png (1254×1254, baked navy bg) without recoloring the mark. Split content blocks: blue A mark (block0), ARYONIX wordmark (block1), light divider (block2), DESIGN. DEVELOP. DEPLOY. tagline (block3). Produced public/brand/{logo-mark 288×244, logo-wordmark 460×52, logo-full 760×581}.png + src/app/{icon 512, apple-icon 180, opengraph-image, twitter-image 1200×630 on #08090B}.png. All serve 200.
+- Data layer: src/lib/site.ts (brand facts, nav), services.ts (8 services with inquiry preselect mapping), work.ts (6 entries, ProjectStatus union: "Concept Project" | "Prospective-Client Demo" | "Unapproved Concept Proposal", per-project caseStudy.disclaimer, optional liveDemo {href, linkLabel, note}), inquiry.ts (11 project types with per-type features, 6 budgets, 5 timelines, buildWhatsAppMessage + buildWhatsAppLink → wa.me/919359368382).
+- Design system: globals.css — dark-only tokens (#08090B/#111317/#F3F4F6/#969BA5/#386BFF), .shell, .label-micro, .text-stroke, scroll-reveal gated on html.js (content visible without JS), marquee/hero-float/orbit-spin keyframes, dark scrollbars, blue selection, focus-visible ring, prefers-reduced-motion kill-switch. layout.tsx — Inter + Space Grotesk + Cormorant Garamond (ND mockup) + Archivo (RF mockup) via next/font, full metadata, Organization JSON-LD, html.js boot script.
+- Primitives: Reveal (IntersectionObserver + reduced-motion safe), SectionHeader (indexed headers 01–06), LogoLockup (keyed mark+wordmark), TaglineMarquee (aria-hidden duplicate track).
+- Nav: fixed, transparent→blurred on scroll, solid while mobile overlay open (avoids backdrop-filter containing-block trap), mobile dialog menu with aria wiring, Escape, focus in/out, scroll lock.
+- Hero: exact brief copy + blue period signature, dual CTAs, tagline row, original all-CSS visual (browser frame with miniature ARYONIX homepage, overlapping palette/type specimen card, blueprint dot grid + registration marks).
+- Services: sticky intro + 8 editorial rows; clicking a row dispatches "aryonix:preselect-type" CustomEvent and scrolls to #inquiry (verified: "E-commerce Websites" → step 2 with ecommerce checked).
+- Studio: "Design-led. Engineering-grade." + 5 principles grid. Process: 6 numbered steps (01 Discover … 06 Evolve).
+- Work: 6 entries with genuinely distinct mockups — FITNIQ (condensed italic + stripes + text-stroke), ORBIT (rings + orbit-spin + schedule rows), MERIDIAN (light editorial serif), FOLIO (whitespace grid), NEW DIMENSION (ivory/charcoal photo-led, Cormorant, demo-ribbon, Placeholder·Unsplash labels), ROCKFOLD FITNESS (dark cinematic, inline SVG badge with arc text + barbell, Archivo black headline "LIFT. REPEAT. BELONG.", real training photos, "Concept photography" + "Demo form · placeholders only" labels). Case-study Dialog per entry with per-project honest disclaimers.
+- Demo viewer (demo-viewer.tsx): full-screen Dialog with top bar (title + per-project note + always-visible "Open in new tab" fallback + close) and iframe for the two exported concept sites.
+- Inquiry: 4-step progressive disclosure (Contact → Project → Features & preferences → Review & send); validation with flushSync so focus lands on the first invalid field after React 19 batching (fixed during QA); role=alert errors, aria-invalid, values preserved across steps; feature chips derived from selected type (reset on change); review step with per-section Edit; WhatsApp handoff with confirmation panel (Reopen link, copy, collapsible preview, "not sent automatically / nothing stored" copy, email fallback, new-inquiry reset).
+- Final CTA + footer: contact index (email/WhatsApp/Instagram/GitHub/website — real facts only), footer with auto year (© 2026 verified), safe-area padding, mt-auto sticky footer.
+- New Dimension export rebuilt: zip → /home/z/nd-build/app, next.config (output:"export", basePath:"/new-dimension", images.unoptimized, ignore TS/ESLint), api route removed, node_modules hard-linked (cp -al) after fixing a wrong-destination copy, next build → out/ → public/new-dimension/ (6.5MB, 200-verified). Mockup photos re-copied to public/work/new-dimension/.
+- next.config.ts rewrites (beforeFiles): /images/:path* → /new-dimension/images/:path* and /nd-monogram.svg → /new-dimension/nd-monogram.svg (fixes next/image+unoptimized basePath omission; ARYONIX site never uses /images/*).
+- eslint.config.mjs ignores: public/new-dimension/**, public/rockfold/**, scripts/qa-*.png. Final lint clean (fixed react-hooks/preserve-manual-memoization by restructuring message useMemo deps; listener moved to useEffect; unused eslint-disable removed).
+
+Agent Browser QA (screenshots in scripts/qa2-*.png):
+- Desktop 1440×900: hero, marquee, services rows, all 6 work mockups, Rockfold + FITNIQ dialogs, studio, process, CTA, footer — all verified visually.
+- Rockfold viewer: iframe loads /rockfold/index.html (title verified), 15 imgs (14 loaded; the "broken" one is the concept's own empty crossfade layer vLayerB by design), instant-scroll inside iframe works, viewer chrome note correct.
+- ND viewer: iframe loads /new-dimension/index.html, images lazy-load on scroll (3/14 at open — rest fire on scroll, consistent with prior session).
+- Form: empty submit → 2 role=alert errors + focus inq-fullName (after flushSync fix); bad email → specific message + focus inq-email + values preserved; short description error; full valid flow → step 4 review → WhatsApp popup on api.whatsapp.com with phone=919359368382 and the FULL encoded message (name/email/brand/type/description/features/budget/timeline) — payload verified in the popup URL; confirmation panel with Reopen/Copy/Preview + email fallback + new-inquiry reset. NOTE: after opening, evals defaulted to the popup tab (same false-reading trap as last session) — closed popup before verifying main tab.
+- Services preselect: "E-commerce Websites" → step 2 with ecommerce radio checked.
+- Mobile 390×844: no horizontal overflow; hero, menu overlay (opaque rgb(8,9,11), focus→first link), studio/process, footer verified; early "blank hero" screenshot was a mid-reveal-transition capture — DOM states confirmed "in" and re-screenshot correct.
+- Console: zero page errors; only HMR/React-DevTools info. Dev log clean. Metadata icons + OG image + brand assets all 200.
+
+Stage Summary:
+- Full ARYONIX site rebuilt and hardened at / (single user-visible route), lint clean, dev server healthy on 3000.
+- Selected Work now: 4 self-initiated concepts + 2 real-business browsable concepts (New Dimension demo, Rockfold unapproved proposal), each with honest labels at every level.
+- WhatsApp journey verified end-to-end with exact recipient 919359368382.
+- Key artifacts: src/components/* (16 components incl. demo-viewer), src/lib/* (4 data modules), public/brand/*, public/new-dimension/ (export), public/rockfold/ (static site), public/work/{new-dimension,rockfold}/ (mockup photos), scripts/make_brand_assets.py.
+- Rebuild recipe for ND export: /home/z/nd-build/app (node_modules hard-linked) → ./node_modules/.bin/next build → cp out → public/new-dimension/. Rockfold needs no build (plain static files).

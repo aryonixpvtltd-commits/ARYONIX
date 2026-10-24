@@ -1,0 +1,7 @@
+# Rockfold Fitness — crawler rules
+# NOTE: replace the sitemap domain once the final domain is confirmed.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://www.rockfoldfitness.com/sitemap.xml

@@ -1,0 +1,227 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-cormorant: var(--font-cormorant-garamond), "Cormorant Garamond", Georgia, serif;
+  --font-archivo: var(--font-archivo), var(--font-space-grotesk), "Arial Black", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, monospace;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/*
+ * ARYONIX — dark-only editorial palette.
+ * Near-black canvas, charcoal surfaces, warm-white type, muted steel,
+ * and one electric blue accent used sparingly.
+ */
+:root {
+  --radius: 0.375rem;
+  --background: #08090b;
+  --foreground: #f3f4f6;
+  --card: #111317;
+  --card-foreground: #f3f4f6;
+  --popover: #111317;
+  --popover-foreground: #f3f4f6;
+  --primary: #386bff;
+  --primary-foreground: #f5f8ff;
+  --secondary: #191c22;
+  --secondary-foreground: #f3f4f6;
+  --muted: #15181d;
+  --muted-foreground: #969ba5;
+  --accent: #1a1e26;
+  --accent-foreground: #f3f4f6;
+  --destructive: #e5484d;
+  --border: #21252d;
+  --input: #262b34;
+  --ring: #386bff;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: #386bff;
+    color: #f5f8ff;
+  }
+
+  /* Dark, slim scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #2a2f39 transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #262b34;
+    border-radius: 8px;
+    border: 2px solid #08090b;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #333a46;
+  }
+
+  /* One consistent, visible keyboard focus ring everywhere */
+  :focus-visible {
+    outline: 2px solid #386bff;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+/* Layout helper — the single content measure used across all sections */
+.shell {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+@media (min-width: 640px) {
+  .shell {
+    padding-inline: 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .shell {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Micro editorial label */
+.label-micro {
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* Outlined display text (FITNIQ mockup) */
+.text-stroke {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(243, 244, 246, 0.85);
+}
+
+/* Scroll-reveal — content stays visible without JavaScript:
+   the starting state only applies once <html class="js"> is set. */
+html.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+html.js [data-reveal="in"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Marquee */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 32s linear infinite;
+}
+
+/* Hero float */
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.hero-float {
+  animation: hero-float 7s ease-in-out infinite;
+}
+
+/* Orbital spin (ORBIT mockup) */
+@keyframes orbit-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.orbit-spin {
+  animation: orbit-spin 14s linear infinite;
+}
+
+/* Reduced motion: stop everything, show all content instantly */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee-track,
+  .hero-float,
+  .orbit-spin {
+    animation: none !important;
+  }
+  html.js [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
